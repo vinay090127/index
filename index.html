@@ -3,317 +3,439 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gadget Store App</title>
+<title>Professional Gadget Store</title>
 
 <style>
 
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial,sans-serif;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
 }
 
 body{
-    background:
-    linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)),
-    url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1200');
-    background-size:cover;
-    background-position:center;
-    background-attachment:fixed;
-    min-height:100vh;
+background:
+linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)),
+url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1200');
+background-size:cover;
+background-position:center;
+background-attachment:fixed;
+min-height:100vh;
+overflow-x:hidden;
+}
+
+/* SPLASH EFFECTS */
+
+body::before{
+content:"";
+position:fixed;
+width:350px;
+height:350px;
+background:linear-gradient(#2563eb,#60a5fa);
+border-radius:50%;
+top:-120px;
+left:-100px;
+opacity:0.35;
+filter:blur(20px);
+}
+
+body::after{
+content:"";
+position:fixed;
+width:300px;
+height:300px;
+background:linear-gradient(#06b6d4,#2563eb);
+border-radius:50%;
+bottom:-120px;
+right:-100px;
+opacity:0.35;
+filter:blur(20px);
 }
 
 /* AUTH */
 
 .auth-container{
-    width:380px;
-    background:rgba(255,255,255,0.12);
-    backdrop-filter:blur(15px);
-    border:1px solid rgba(255,255,255,0.2);
-    padding:30px;
-    border-radius:25px;
-    box-shadow:0 10px 30px rgba(0,0,0,0.3);
-    margin:60px auto;
+width:420px;
+background:rgba(255,255,255,0.12);
+backdrop-filter:blur(25px);
+border:1px solid rgba(255,255,255,0.25);
+padding:40px;
+border-radius:30px;
+box-shadow:
+0 0 30px rgba(37,99,235,0.3),
+0 0 60px rgba(37,99,235,0.2);
+margin:50px auto;
+position:relative;
+overflow:hidden;
+}
+
+.auth-container::before{
+content:"";
+position:absolute;
+width:250px;
+height:250px;
+background:linear-gradient(#2563eb,#60a5fa);
+border-radius:50%;
+top:-120px;
+right:-100px;
+opacity:0.4;
+}
+
+.auth-container::after{
+content:"";
+position:absolute;
+width:200px;
+height:200px;
+background:linear-gradient(#06b6d4,#3b82f6);
+border-radius:50%;
+bottom:-100px;
+left:-80px;
+opacity:0.4;
 }
 
 .auth-container h2{
-    text-align:center;
-    margin-bottom:25px;
-    color:white;
-    font-size:30px;
+text-align:center;
+margin-bottom:30px;
+color:white;
+font-size:38px;
+position:relative;
+z-index:2;
 }
 
 .input-box{
-    margin-bottom:18px;
+margin-bottom:18px;
+position:relative;
+z-index:2;
 }
 
 .input-box input{
-    width:100%;
-    padding:14px;
-    border:none;
-    border-radius:12px;
-    outline:none;
-    background:rgba(255,255,255,0.2);
-    color:white;
-    font-size:15px;
+width:100%;
+padding:16px;
+border:none;
+border-radius:16px;
+outline:none;
+background:rgba(255,255,255,0.15);
+color:white;
+font-size:16px;
+border:1px solid rgba(255,255,255,0.2);
 }
 
 .input-box input::placeholder{
-    color:#eee;
+color:#eee;
+}
+
+.input-box input:focus{
+border:1px solid #60a5fa;
+box-shadow:0 0 15px rgba(96,165,250,0.5);
 }
 
 button{
-    width:100%;
-    padding:13px;
-    border:none;
-    border-radius:12px;
-    background:#2563eb;
-    color:white;
-    font-size:16px;
-    cursor:pointer;
+width:100%;
+padding:15px;
+border:none;
+border-radius:16px;
+background:linear-gradient(45deg,#2563eb,#3b82f6);
+color:white;
+font-size:17px;
+cursor:pointer;
+position:relative;
+z-index:2;
+transition:0.4s;
 }
 
 button:hover{
-    background:#1d4ed8;
+transform:translateY(-2px);
+box-shadow:0 10px 20px rgba(37,99,235,0.4);
 }
 
 .switch{
-    text-align:center;
-    margin-top:15px;
-    color:white;
+text-align:center;
+margin-top:15px;
+color:white;
+position:relative;
+z-index:2;
 }
 
 .switch span{
-    color:#60a5fa;
-    cursor:pointer;
-    font-weight:bold;
+color:#60a5fa;
+cursor:pointer;
+font-weight:bold;
 }
 
 #message{
-    text-align:center;
-    margin-top:15px;
-    color:white;
+text-align:center;
+margin-top:15px;
+color:white;
+position:relative;
+z-index:2;
 }
 
 /* APP */
 
 #appPage{
-    display:none;
-    background:#f1f5f9;
-    min-height:100vh;
+display:none;
+background:#f1f5f9;
+min-height:100vh;
 }
 
 .header{
-    background:white;
-    padding:15px 20px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    box-shadow:0 2px 10px rgba(0,0,0,0.1);
-    position:sticky;
-    top:0;
-    z-index:100;
+background:white;
+padding:15px 20px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+box-shadow:0 2px 10px rgba(0,0,0,0.1);
+position:sticky;
+top:0;
+z-index:100;
 }
 
 .logo{
-    font-size:25px;
-    font-weight:bold;
-    color:#2563eb;
+font-size:26px;
+font-weight:bold;
+color:#2563eb;
 }
 
 .search-box{
-    position:relative;
-    width:55%;
+position:relative;
+width:55%;
 }
 
 .search-box input{
-    width:100%;
-    padding:12px;
-    border-radius:10px;
-    border:1px solid #ccc;
+width:100%;
+padding:13px;
+border-radius:12px;
+border:1px solid #ccc;
+outline:none;
 }
 
 .search-results{
-    position:absolute;
-    top:55px;
-    width:100%;
-    background:white;
-    border-radius:15px;
-    box-shadow:0 5px 20px rgba(0,0,0,0.2);
-    max-height:300px;
-    overflow-y:auto;
-    display:none;
+position:absolute;
+top:60px;
+width:100%;
+background:white;
+border-radius:15px;
+box-shadow:0 5px 20px rgba(0,0,0,0.2);
+max-height:300px;
+overflow-y:auto;
+display:none;
+z-index:999;
 }
 
 .search-item{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    padding:10px;
-    cursor:pointer;
-    border-bottom:1px solid #eee;
+display:flex;
+align-items:center;
+gap:10px;
+padding:10px;
+cursor:pointer;
+border-bottom:1px solid #eee;
 }
 
 .search-item:hover{
-    background:#f1f5f9;
+background:#f1f5f9;
 }
 
 .search-item img{
-    width:55px;
-    height:55px;
-    object-fit:cover;
-    border-radius:10px;
+width:55px;
+height:55px;
+border-radius:10px;
+object-fit:cover;
 }
 
 .profile{
-    width:45px;
-    height:45px;
-    border-radius:50%;
-    background:#2563eb;
-    color:white;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-weight:bold;
-    cursor:pointer;
-    font-size:18px;
+width:48px;
+height:48px;
+border-radius:50%;
+background:linear-gradient(45deg,#2563eb,#60a5fa);
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+font-weight:bold;
+cursor:pointer;
+font-size:20px;
 }
 
 /* PRODUCTS */
 
 .products{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:20px;
-    padding:20px;
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:18px;
+padding:20px;
 }
 
 .card{
-    background:white;
-    border-radius:18px;
-    overflow:hidden;
-    box-shadow:0 5px 15px rgba(0,0,0,0.1);
-    cursor:pointer;
-    transition:0.3s;
+background:white;
+border-radius:22px;
+overflow:hidden;
+box-shadow:0 10px 25px rgba(0,0,0,0.12);
+cursor:pointer;
+transition:0.4s;
 }
 
 .card:hover{
-    transform:translateY(-5px);
+transform:translateY(-8px) scale(1.02);
 }
 
 .card img{
-    width:100%;
-    height:220px;
-    object-fit:cover;
+width:100%;
+height:180px;
+object-fit:cover;
 }
 
 .card h3{
-    padding:10px;
+padding:12px 12px 5px;
+font-size:18px;
 }
 
 .card p{
-    padding:0 10px 15px;
-    color:#2563eb;
-    font-weight:bold;
+padding:0 12px 18px;
+color:#2563eb;
+font-weight:bold;
+font-size:17px;
 }
 
-/* PRODUCT DETAILS */
+/* DETAILS */
 
 #detailsPage{
-    display:none;
-    padding:20px;
-    background:#f1f5f9;
-    min-height:100vh;
+display:none;
+padding:20px;
+background:#f1f5f9;
+min-height:100vh;
 }
 
 .details-card{
-    background:white;
-    border-radius:20px;
-    padding:20px;
-    max-width:500px;
-    margin:auto;
-    text-align:center;
-    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+background:white;
+border-radius:20px;
+padding:20px;
+max-width:500px;
+margin:auto;
+text-align:center;
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
 }
 
 .details-card img{
-    width:100%;
-    border-radius:15px;
+width:100%;
+border-radius:15px;
 }
 
 .details-card h2{
-    margin:15px 0;
+margin:15px 0;
 }
 
 .back-btn{
-    background:red;
-    margin-top:20px;
+background:red;
+margin-top:20px;
 }
 
 /* PROFILE PANEL */
 
 .profile-panel{
-    position:fixed;
-    top:0;
-    right:-350px;
-    width:320px;
-    height:100%;
-    background:white;
-    box-shadow:-5px 0 20px rgba(0,0,0,0.2);
-    transition:0.4s;
-    z-index:999;
-    padding:25px;
+position:fixed;
+top:0;
+right:-400px;
+width:380px;
+height:100%;
+background:white;
+box-shadow:-5px 0 30px rgba(0,0,0,0.2);
+transition:0.4s;
+z-index:9999;
+padding:25px;
+overflow-y:auto;
 }
 
 .profile-panel.active{
-    right:0;
+right:0;
+}
+
+.close-profile{
+position:absolute;
+top:15px;
+right:15px;
+width:40px;
+height:40px;
+border-radius:50%;
+background:#ef4444;
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:20px;
+cursor:pointer;
+font-weight:bold;
 }
 
 .profile-top{
-    text-align:center;
+text-align:center;
+margin-top:20px;
 }
 
 .profile-avatar{
-    width:90px;
-    height:90px;
-    border-radius:50%;
-    background:#2563eb;
-    color:white;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-size:35px;
-    margin:auto;
-    margin-bottom:15px;
+width:100px;
+height:100px;
+border-radius:50%;
+background:linear-gradient(45deg,#2563eb,#60a5fa);
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:40px;
+margin:auto;
+margin-bottom:15px;
 }
 
 .profile-details{
-    margin-top:25px;
+margin-top:30px;
 }
 
-.profile-details p{
-    margin-bottom:15px;
-    padding:12px;
-    background:#f1f5f9;
-    border-radius:10px;
+.profile-card{
+background:#f8fafc;
+border-radius:16px;
+padding:16px;
+margin-bottom:18px;
+box-shadow:0 5px 10px rgba(0,0,0,0.05);
 }
 
-.extra-box{
-    margin-top:20px;
-    background:#eff6ff;
-    padding:15px;
-    border-radius:15px;
+.profile-card h3{
+color:#2563eb;
+margin-bottom:10px;
 }
 
-.extra-box h3{
-    margin-bottom:10px;
-    color:#2563eb;
+.profile-card ul{
+padding-left:18px;
+}
+
+.profile-card li{
+margin-bottom:8px;
 }
 
 .logout-btn{
-    background:red;
-    margin-top:25px;
+background:linear-gradient(45deg,#ef4444,#dc2626);
+margin-top:20px;
+}
+
+/* MOBILE */
+
+@media(max-width:700px){
+
+.auth-container{
+width:92%;
+}
+
+.products{
+grid-template-columns:repeat(2,1fr);
+}
+
+.search-box{
+width:50%;
+}
+
+.profile-panel{
+width:100%;
+}
+
 }
 
 </style>
@@ -321,7 +443,7 @@ button:hover{
 
 <body>
 
-<!-- AUTH PAGE -->
+<!-- LOGIN / SIGNUP -->
 
 <div class="auth-container" id="authPage">
 
@@ -346,7 +468,7 @@ Already have account?
 
 </div>
 
-<!-- APP PAGE -->
+<!-- APP -->
 
 <div id="appPage">
 
@@ -372,7 +494,7 @@ U
 
 </div>
 
-<!-- PRODUCT DETAILS -->
+<!-- DETAILS -->
 
 <div id="detailsPage">
 
@@ -394,9 +516,13 @@ Back
 
 </div>
 
-<!-- PROFILE PANEL -->
+<!-- PROFILE -->
 
 <div class="profile-panel" id="profilePanel">
+
+<div class="close-profile" id="closeProfile">
+✕
+</div>
 
 <div class="profile-top">
 
@@ -406,32 +532,75 @@ U
 
 <h2 id="profileName">User</h2>
 
+<p style="color:gray;margin-top:5px;">
+Premium Gadget Customer
+</p>
+
 </div>
 
 <div class="profile-details">
 
-<p>
-<b>Account Type:</b><br>
-Premium Gadget Member
-</p>
+<div class="profile-card">
 
-<p>
-<b>Orders:</b><br>
-12 Products Purchased
-</p>
+<h3>User Details</h3>
 
-<p>
-<b>Wishlist:</b><br>
-8 Saved Gadgets
-</p>
+<p><b>Name:</b> <span id="userDetailName">User</span></p>
 
-<div class="extra-box">
+<p><b>Email:</b> user@gmail.com</p>
 
-<h3>Extra Details</h3>
+<p><b>Membership:</b> Premium</p>
 
-<p>Latest Tech Updates Enabled</p>
-<p>Fast Delivery Access</p>
-<p>Exclusive Gadget Discounts</p>
+<p><b>Orders:</b> 12 Completed</p>
+
+</div>
+
+<div class="profile-card">
+
+<h3>Wishlist</h3>
+
+<ul>
+<li>iPhone 15 Pro Max</li>
+<li>MacBook Pro M3</li>
+<li>PlayStation 5</li>
+<li>VR Headset</li>
+</ul>
+
+</div>
+
+<div class="profile-card">
+
+<h3>Cart Items</h3>
+
+<ul>
+<li>Wireless Headphones</li>
+<li>Gaming Mouse</li>
+<li>Smart Watch</li>
+</ul>
+
+</div>
+
+<div class="profile-card">
+
+<h3>Company Policies</h3>
+
+<ul>
+<li>7 Days Easy Return</li>
+<li>100% Secure Payments</li>
+<li>Free Shipping Above ₹999</li>
+<li>Warranty Available</li>
+</ul>
+
+</div>
+
+<div class="profile-card">
+
+<h3>Help & Support</h3>
+
+<p>Email: support@gadgets.com</p>
+
+<p>Phone: +91 9876543210</p>
+
+<p>24×7 Customer Support Available</p>
 
 </div>
 
@@ -448,28 +617,24 @@ Logout
 import { createClient }
 from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
 
-// ======================================
-// SUPABASE KEYS
-// ======================================
+// SUPABASE
 
-const supabaseUrl = "https://frwbimnghfoidnjnfuhn.supabase.co"
+const supabaseUrl = "YOUR_SUPABASE_URL"
 
-const supabaseAnonKey = "sb_publishable_uSleMs6GiwmOuKIH9m4xOA__pc2sq_q"
-
-// ======================================
+const supabaseAnonKey = "YOUR_SUPABASE_ANON_KEY"
 
 const supabase = createClient(
 supabaseUrl,
 supabaseAnonKey
 )
 
+// AUTH
+
 let isLogin = false
 
 const title = document.getElementById("title")
 const authBtn = document.getElementById("authBtn")
 const message = document.getElementById("message")
-
-// TOGGLE LOGIN / SIGNUP
 
 document.addEventListener("click",(e)=>{
 
@@ -486,8 +651,7 @@ document.querySelector(".switch").innerHTML =
 `Don't have account?
 <span id="toggleAuth">Signup</span>`
 
-}
-else{
+}else{
 
 title.innerText = "Signup"
 authBtn.innerText = "Signup"
@@ -501,8 +665,6 @@ document.querySelector(".switch").innerHTML =
 }
 
 })
-
-// AUTH
 
 authBtn.addEventListener("click", async()=>{
 
@@ -534,9 +696,9 @@ if(data.length > 0){
 message.style.color = "lightgreen"
 message.innerText = "Login Success"
 
-document.getElementById("authPage").style.display = "none"
+document.getElementById("authPage").style.display="none"
 
-document.getElementById("appPage").style.display = "block"
+document.getElementById("appPage").style.display="block"
 
 document.getElementById("profileBtn")
 .innerText = username[0].toUpperCase()
@@ -547,8 +709,10 @@ document.getElementById("profileAvatar")
 document.getElementById("profileName")
 .innerText = username
 
-}
-else{
+document.getElementById("userDetailName")
+.innerText = username
+
+}else{
 
 message.style.color = "red"
 message.innerText = "Invalid Login"
@@ -575,8 +739,7 @@ if(error){
 message.style.color = "red"
 message.innerText = error.message
 
-}
-else{
+}else{
 
 message.style.color = "lightgreen"
 message.innerText = "Signup Success"
@@ -634,20 +797,6 @@ desc:"Noise cancellation headphones."
 },
 
 {
-name:"Bluetooth Speaker",
-price:"₹4,499",
-image:"https://images.unsplash.com/photo-1589003077984-894e133dabab",
-desc:"Portable wireless bluetooth speaker."
-},
-
-{
-name:"DSLR Camera",
-price:"₹55,000",
-image:"https://images.unsplash.com/photo-1516035069371-29a1b244cc32",
-desc:"Professional DSLR camera."
-},
-
-{
 name:"PlayStation 5",
 price:"₹54,999",
 image:"https://images.unsplash.com/photo-1606813907291-d86efa9b94db",
@@ -655,52 +804,10 @@ desc:"Next generation gaming console."
 },
 
 {
-name:"Xbox Series X",
-price:"₹52,999",
-image:"https://images.unsplash.com/photo-1621259182978-fbf93132d53d",
-desc:"Microsoft powerful gaming console."
-},
-
-{
-name:"iPad Air",
-price:"₹59,999",
-image:"https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0",
-desc:"Apple lightweight performance tablet."
-},
-
-{
-name:"Mechanical Keyboard",
-price:"₹6,999",
-image:"https://images.unsplash.com/photo-1511467687858-23d96c32e4ae",
-desc:"RGB mechanical gaming keyboard."
-},
-
-{
-name:"Gaming Mouse",
-price:"₹2,999",
-image:"https://images.unsplash.com/photo-1527814050087-3793815479db",
-desc:"High precision gaming mouse."
-},
-
-{
-name:"Drone Camera",
-price:"₹89,999",
-image:"https://images.unsplash.com/photo-1473968512647-3e447244af8f",
-desc:"4K professional drone camera."
-},
-
-{
 name:"VR Headset",
 price:"₹39,999",
 image:"https://images.unsplash.com/photo-1622979135225-d2ba269cf1ac",
 desc:"Immersive virtual reality headset."
-},
-
-{
-name:"Smart TV",
-price:"₹74,999",
-image:"https://images.unsplash.com/photo-1593784991095-a205069470b6",
-desc:"Ultra HD smart Android television."
 }
 
 ]
@@ -791,7 +898,7 @@ attachSearchItems(filtered)
 
 })
 
-// SEARCH ITEM CLICK
+// SEARCH CLICK
 
 function attachSearchItems(data){
 
@@ -867,7 +974,7 @@ document.getElementById("appPage").style.display =
 
 }
 
-// PROFILE PANEL
+// PROFILE
 
 const profileBtn =
 document.getElementById("profileBtn")
@@ -877,7 +984,14 @@ document.getElementById("profilePanel")
 
 profileBtn.addEventListener("click",()=>{
 
-profilePanel.classList.toggle("active")
+profilePanel.classList.add("active")
+
+})
+
+document.getElementById("closeProfile")
+.addEventListener("click",()=>{
+
+profilePanel.classList.remove("active")
 
 })
 
@@ -899,6 +1013,21 @@ document.getElementById("password").value = ""
 message.innerText = ""
 
 }
+
+// CLOSE SEARCH OUTSIDE
+
+document.addEventListener("click",(e)=>{
+
+if(
+!searchInput.contains(e.target) &&
+!searchResults.contains(e.target)
+){
+
+searchResults.style.display = "none"
+
+}
+
+})
 
 </script>
 
