@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>ElectroHub Electronics Store</title>
 
 <style>
@@ -16,7 +17,7 @@ font-family:Arial,sans-serif;
 
 body{
 background:
-linear-gradient(rgba(5,10,25,0.88),rgba(5,10,25,0.9)),
+linear-gradient(rgba(5,10,25,0.88),rgba(5,10,25,0.92)),
 url('https://images.unsplash.com/photo-1498049794561-7780e7231661?q=80&w=1400');
 background-size:cover;
 background-position:center;
@@ -30,12 +31,12 @@ overflow-x:hidden;
 body::before{
 content:"";
 position:fixed;
-width:420px;
-height:420px;
+width:450px;
+height:450px;
 background:linear-gradient(#00c6ff,#0072ff);
 border-radius:50%;
-top:-150px;
-left:-120px;
+top:-180px;
+left:-140px;
 opacity:0.35;
 filter:blur(40px);
 animation:float1 8s infinite alternate;
@@ -44,13 +45,13 @@ animation:float1 8s infinite alternate;
 body::after{
 content:"";
 position:fixed;
-width:350px;
-height:350px;
+width:380px;
+height:380px;
 background:linear-gradient(#7f5af0,#2cb67d);
 border-radius:50%;
-bottom:-150px;
-right:-120px;
-opacity:0.3;
+bottom:-160px;
+right:-140px;
+opacity:0.35;
 filter:blur(40px);
 animation:float2 8s infinite alternate;
 }
@@ -65,127 +66,98 @@ animation:float2 8s infinite alternate;
 100%{transform:translateY(-40px);}
 }
 
-/* FLASH ANIMATION */
+/* FLASH EFFECTS */
 
-.flash{
+.flash,
+.flash2,
+.flash3{
 position:fixed;
-width:180px;
-height:180px;
 border-radius:50%;
-background:radial-gradient(circle,
-rgba(255,255,255,0.9),
-rgba(0,198,255,0.4),
-transparent);
-animation:flashMove 6s linear infinite;
-filter:blur(6px);
 pointer-events:none;
 z-index:0;
 }
 
+.flash{
+width:180px;
+height:180px;
+background:radial-gradient(circle,
+rgba(255,255,255,0.9),
+rgba(0,198,255,0.3),
+transparent);
+animation:flashMove 6s linear infinite;
+filter:blur(6px);
+}
+
 .flash2{
-position:fixed;
-width:220px;
-height:220px;
-border-radius:50%;
+width:230px;
+height:230px;
 background:radial-gradient(circle,
 rgba(255,255,255,0.7),
 rgba(127,90,240,0.3),
 transparent);
 animation:flashMove2 8s linear infinite;
 filter:blur(10px);
-pointer-events:none;
-z-index:0;
 }
 
 .flash3{
-position:fixed;
-width:140px;
-height:140px;
-border-radius:50%;
+width:150px;
+height:150px;
 background:radial-gradient(circle,
-rgba(255,255,255,0.9),
+rgba(255,255,255,0.8),
 rgba(44,182,125,0.35),
 transparent);
 animation:flashMove3 7s linear infinite;
 filter:blur(5px);
-pointer-events:none;
-z-index:0;
 }
 
 @keyframes flashMove{
-
 0%{
 transform:translate(-100px,-100px);
 opacity:0;
 }
-
 20%{
 opacity:1;
 }
-
-50%{
-transform:translate(500px,200px);
-opacity:0.8;
-}
-
 100%{
-transform:translate(1200px,600px);
+transform:translate(1300px,700px);
 opacity:0;
 }
-
 }
 
 @keyframes flashMove2{
-
 0%{
-transform:translate(1200px,-100px);
+transform:translate(1300px,-100px);
 opacity:0;
 }
-
 20%{
 opacity:1;
 }
-
-50%{
-transform:translate(500px,300px);
-opacity:0.8;
-}
-
 100%{
-transform:translate(-300px,700px);
+transform:translate(-200px,800px);
 opacity:0;
 }
-
 }
 
 @keyframes flashMove3{
-
 0%{
 transform:translate(600px,700px);
 opacity:0;
 }
-
 30%{
 opacity:1;
 }
-
-70%{
-opacity:0.9;
-}
-
 100%{
-transform:translate(100px,-300px);
+transform:translate(50px,-300px);
 opacity:0;
 }
-
 }
 
-/* AUTH */
+/* LOGIN */
 
 .auth-container{
 width:430px;
 background:rgba(255,255,255,0.1);
-backdrop-filter:blur(30px);
+backdrop-filter:blur(25px);
 border:1px solid rgba(255,255,255,0.2);
 padding:45px;
 border-radius:35px;
@@ -208,7 +180,6 @@ border-radius:50%;
 top:-120px;
 right:-100px;
 opacity:0.3;
-filter:blur(10px);
 }
 
 .auth-container::after{
@@ -221,12 +192,11 @@ border-radius:50%;
 bottom:-120px;
 left:-90px;
 opacity:0.25;
-filter:blur(10px);
 }
 
 .auth-logo{
 text-align:center;
-font-size:65px;
+font-size:70px;
 margin-bottom:10px;
 position:relative;
 z-index:2;
@@ -234,7 +204,7 @@ z-index:2;
 
 .auth-title{
 text-align:center;
-font-size:40px;
+font-size:42px;
 font-weight:bold;
 color:white;
 margin-bottom:5px;
@@ -290,10 +260,7 @@ color:white;
 font-size:17px;
 font-weight:bold;
 cursor:pointer;
-position:relative;
-z-index:2;
 transition:0.4s;
-letter-spacing:0.5px;
 }
 
 button:hover{
@@ -305,8 +272,6 @@ box-shadow:0 10px 25px rgba(0,114,255,0.45);
 text-align:center;
 margin-top:15px;
 color:white;
-position:relative;
-z-index:2;
 }
 
 .switch span{
@@ -319,11 +284,25 @@ font-weight:bold;
 text-align:center;
 margin-top:15px;
 color:white;
-position:relative;
-z-index:2;
 }
 
-/* SUCCESS POPUP */
+/* SUCCESS */
+
+.success-overlay{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.5);
+backdrop-filter:blur(6px);
+display:none;
+z-index:9998;
+}
+
+.success-overlay.active{
+display:block;
+}
 
 .success-popup{
 position:fixed;
@@ -334,17 +313,16 @@ background:white;
 padding:35px;
 border-radius:30px;
 text-align:center;
-box-shadow:0 20px 40px rgba(0,0,0,0.25);
-z-index:10000;
-transition:0.4s;
 width:320px;
+z-index:9999;
+transition:0.4s;
 }
 
 .success-popup.active{
 transform:translate(-50%,-50%) scale(1);
 }
 
-.success-popup .tick{
+.tick{
 width:90px;
 height:90px;
 border-radius:50%;
@@ -356,50 +334,11 @@ font-size:45px;
 color:white;
 margin:auto;
 margin-bottom:20px;
-animation:tickPop 0.6s ease;
-}
-
-@keyframes tickPop{
-
-0%{
-transform:scale(0);
-}
-
-70%{
-transform:scale(1.15);
-}
-
-100%{
-transform:scale(1);
-}
-
 }
 
 .success-popup h2{
 color:#16a34a;
 margin-bottom:10px;
-font-size:28px;
-}
-
-.success-popup p{
-color:gray;
-font-size:15px;
-}
-
-.success-overlay{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.45);
-backdrop-filter:blur(6px);
-z-index:9999;
-display:none;
-}
-
-.success-overlay.active{
-display:block;
 }
 
 /* APP */
@@ -411,16 +350,15 @@ min-height:100vh;
 }
 
 .header{
-background:rgba(255,255,255,0.95);
-padding:15px 22px;
+background:white;
+padding:15px 20px;
 display:flex;
-align-items:center;
 justify-content:space-between;
-box-shadow:0 4px 15px rgba(0,0,0,0.08);
+align-items:center;
+box-shadow:0 2px 10px rgba(0,0,0,0.1);
 position:sticky;
 top:0;
 z-index:100;
-backdrop-filter:blur(10px);
 }
 
 .logo{
@@ -432,23 +370,16 @@ background:linear-gradient(45deg,#0072ff,#00c6ff);
 }
 
 .search-box{
-position:relative;
 width:55%;
+position:relative;
 }
 
 .search-box input{
 width:100%;
 padding:14px;
 border-radius:14px;
-border:1px solid #dbeafe;
+border:1px solid #ccc;
 outline:none;
-font-size:15px;
-transition:0.3s;
-}
-
-.search-box input:focus{
-border:1px solid #38bdf8;
-box-shadow:0 0 10px rgba(56,189,248,0.3);
 }
 
 .search-results{
@@ -458,15 +389,14 @@ width:100%;
 background:white;
 border-radius:15px;
 box-shadow:0 5px 20px rgba(0,0,0,0.2);
+display:none;
 max-height:300px;
 overflow-y:auto;
-display:none;
 z-index:999;
 }
 
 .search-item{
 display:flex;
-align-items:center;
 gap:10px;
 padding:10px;
 cursor:pointer;
@@ -478,10 +408,10 @@ background:#f1f5f9;
 }
 
 .search-item img{
-width:55px;
-height:55px;
-border-radius:10px;
+width:60px;
+height:60px;
 object-fit:cover;
+border-radius:10px;
 }
 
 .profile{
@@ -489,13 +419,13 @@ width:50px;
 height:50px;
 border-radius:50%;
 background:linear-gradient(45deg,#0072ff,#00c6ff);
-color:white;
 display:flex;
 justify-content:center;
 align-items:center;
+color:white;
+font-size:20px;
 font-weight:bold;
 cursor:pointer;
-font-size:20px;
 }
 
 /* PRODUCTS */
@@ -509,23 +439,16 @@ padding:20px;
 
 .card{
 background:white;
-border-radius:24px;
+border-radius:22px;
 overflow:hidden;
 box-shadow:0 10px 25px rgba(0,0,0,0.1);
-cursor:pointer;
 transition:0.4s;
+cursor:pointer;
 position:relative;
 }
 
 .card:hover{
-transform:translateY(-10px) scale(1.02);
-box-shadow:0 20px 35px rgba(0,114,255,0.2);
-}
-
-.card img{
-width:100%;
-height:190px;
-object-fit:cover;
+transform:translateY(-8px) scale(1.02);
 }
 
 .card::before{
@@ -535,10 +458,16 @@ top:12px;
 left:12px;
 background:linear-gradient(45deg,#0072ff,#00c6ff);
 color:white;
-padding:6px 12px;
+padding:5px 12px;
 border-radius:20px;
 font-size:12px;
 font-weight:bold;
+}
+
+.card img{
+width:100%;
+height:190px;
+object-fit:cover;
 }
 
 .card h3{
@@ -547,10 +476,9 @@ font-size:18px;
 }
 
 .card p{
-padding:0 12px 18px;
+padding:0 12px 15px;
 color:#0072ff;
 font-weight:bold;
-font-size:17px;
 }
 
 /* DETAILS */
@@ -577,10 +505,6 @@ width:100%;
 border-radius:15px;
 }
 
-.details-card h2{
-margin:15px 0;
-}
-
 .back-btn{
 background:red;
 margin-top:20px;
@@ -595,13 +519,11 @@ right:-420px;
 width:390px;
 height:100%;
 background:white;
-box-shadow:-5px 0 30px rgba(0,0,0,0.2);
 transition:0.4s;
 z-index:9999;
 padding:25px;
 overflow-y:auto;
-border-top-left-radius:25px;
-border-bottom-left-radius:25px;
+box-shadow:-5px 0 30px rgba(0,0,0,0.2);
 }
 
 .profile-panel.active{
@@ -615,20 +537,18 @@ left:18px;
 width:42px;
 height:42px;
 border-radius:50%;
-background:linear-gradient(45deg,#ef4444,#dc2626);
+background:red;
 color:white;
 display:flex;
 justify-content:center;
 align-items:center;
-font-size:22px;
 cursor:pointer;
-font-weight:bold;
-box-shadow:0 5px 15px rgba(239,68,68,0.3);
+font-size:20px;
 }
 
 .profile-top{
 text-align:center;
-margin-top:35px;
+margin-top:30px;
 }
 
 .profile-avatar{
@@ -636,36 +556,29 @@ width:110px;
 height:110px;
 border-radius:50%;
 background:linear-gradient(45deg,#0072ff,#00c6ff);
-color:white;
 display:flex;
 justify-content:center;
 align-items:center;
-font-size:42px;
 margin:auto;
+color:white;
+font-size:42px;
 margin-bottom:15px;
-box-shadow:0 10px 20px rgba(0,114,255,0.25);
 }
 
 .profile-card{
 background:#f8fafc;
-border-radius:18px;
 padding:18px;
+border-radius:18px;
 margin-bottom:18px;
-box-shadow:0 5px 10px rgba(0,0,0,0.05);
-transition:0.3s;
-}
-
-.profile-card:hover{
-transform:translateY(-3px);
 }
 
 .profile-card h3{
 color:#0072ff;
-margin-bottom:12px;
+margin-bottom:10px;
 }
 
 .profile-card ul{
-padding-left:18px;
+padding-left:20px;
 }
 
 .profile-card li{
@@ -688,7 +601,6 @@ padding:35px 25px;
 
 .products{
 grid-template-columns:repeat(2,1fr);
-gap:14px;
 }
 
 .card img{
@@ -697,15 +609,10 @@ height:150px;
 
 .profile-panel{
 width:100%;
-border-radius:0;
 }
 
 .search-box{
-width:52%;
-}
-
-.logo{
-font-size:22px;
+width:50%;
 }
 
 }
@@ -719,21 +626,17 @@ font-size:22px;
 <div class="flash2"></div>
 <div class="flash3"></div>
 
-<!-- LOGIN SUCCESS -->
+<!-- SUCCESS -->
 
 <div class="success-overlay" id="successOverlay"></div>
 
 <div class="success-popup" id="successPopup">
 
-<div class="tick">
-✓
-</div>
+<div class="tick">✓</div>
 
 <h2>Login Successful</h2>
 
-<p>
-Welcome to ElectroHub Electronics Store
-</p>
+<p>Welcome to ElectroHub Electronics Store</p>
 
 </div>
 
@@ -844,8 +747,6 @@ Premium Electronics Customer
 
 </div>
 
-<div class="profile-details">
-
 <div class="profile-card">
 
 <h3>User Details</h3>
@@ -916,8 +817,6 @@ Logout
 
 </div>
 
-</div>
-
 <script type="module">
 
 import { createClient }
@@ -926,7 +825,7 @@ from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
 // SUPABASE
 
 const supabaseUrl = "https://frwbimnghfoidnjnfuhn.supabase.co"
-const supabaseAnonKey = "sb_publishable_uSleMs6GiwmOuKIH9m4xOA__pc2sq_q"
+const supabaseAnonKey = "YOUR_sb_publishable_uSleMs6GiwmOuKIH9m4xOA__pc2sq_qSUPABASE_ANON_KEY"
 
 const supabase = createClient(
 supabaseUrl,
@@ -1000,8 +899,6 @@ if(data.length > 0){
 
 message.style.color = "lightgreen"
 message.innerText = "Login Success"
-
-// SUCCESS POPUP
 
 document.getElementById("successOverlay")
 .classList.add("active")
@@ -1079,6 +976,7 @@ const gadgets = [
 
 {
 name:"iPhone 15",
+category:"Mobile",
 price:"₹79,999",
 image:"https://images.unsplash.com/photo-1695048133142-1a20484d2569",
 desc:"Apple latest smartphone with A17 chip."
@@ -1086,6 +984,7 @@ desc:"Apple latest smartphone with A17 chip."
 
 {
 name:"Samsung S24 Ultra",
+category:"Mobile",
 price:"₹1,09,999",
 image:"https://images.unsplash.com/photo-1610945265064-0e34e5519bbf",
 desc:"Premium Samsung flagship smartphone."
@@ -1093,6 +992,7 @@ desc:"Premium Samsung flagship smartphone."
 
 {
 name:"Gaming Laptop",
+category:"Laptop",
 price:"₹1,20,000",
 image:"https://images.unsplash.com/photo-1517336714739-489689fd1ca8",
 desc:"High performance gaming laptop."
@@ -1100,6 +1000,7 @@ desc:"High performance gaming laptop."
 
 {
 name:"MacBook Pro",
+category:"Laptop",
 price:"₹1,89,999",
 image:"https://images.unsplash.com/photo-1515879218367-8466d910aaa4",
 desc:"Powerful Apple laptop for creators."
@@ -1107,6 +1008,7 @@ desc:"Powerful Apple laptop for creators."
 
 {
 name:"Smart Watch",
+category:"Watch",
 price:"₹12,999",
 image:"https://images.unsplash.com/photo-1523275335684-37898b6baf30",
 desc:"Track fitness and notifications."
@@ -1114,6 +1016,7 @@ desc:"Track fitness and notifications."
 
 {
 name:"Wireless Headphones",
+category:"Audio",
 price:"₹5,999",
 image:"https://images.unsplash.com/photo-1505740420928-5e560c06d30e",
 desc:"Noise cancellation headphones."
@@ -1121,6 +1024,7 @@ desc:"Noise cancellation headphones."
 
 {
 name:"PlayStation 5",
+category:"Gaming",
 price:"₹54,999",
 image:"https://images.unsplash.com/photo-1606813907291-d86efa9b94db",
 desc:"Next generation gaming console."
@@ -1128,12 +1032,47 @@ desc:"Next generation gaming console."
 
 {
 name:"VR Headset",
+category:"Gaming",
 price:"₹39,999",
 image:"https://images.unsplash.com/photo-1622979135225-d2ba269cf1ac",
 desc:"Immersive virtual reality headset."
+},
+
+{
+name:"Gaming Mouse",
+category:"Accessories",
+price:"₹2,499",
+image:"https://images.unsplash.com/photo-1527864550417-7fd91fc51a46",
+desc:"RGB gaming mouse."
+},
+
+{
+name:"Mechanical Keyboard",
+category:"Accessories",
+price:"₹6,999",
+image:"https://images.unsplash.com/photo-1511467687858-23d96c32e4ae",
+desc:"RGB mechanical keyboard."
+},
+
+{
+name:"4K Monitor",
+category:"Accessories",
+price:"₹29,999",
+image:"https://images.unsplash.com/photo-1527443224154-c4a3942d3acf",
+desc:"Ultra HD gaming monitor."
+},
+
+{
+name:"Drone Camera",
+category:"Camera",
+price:"₹1,15,999",
+image:"https://images.unsplash.com/photo-1473968512647-3e447244af8f",
+desc:"4K aerial drone camera."
 }
 
 ]
+
+// SHOW PRODUCTS
 
 const productsContainer =
 document.getElementById("productsContainer")
@@ -1189,10 +1128,54 @@ return
 
 const filtered =
 gadgets.filter(item=>
+
 item.name.toLowerCase().includes(value)
+
+||
+
+item.category.toLowerCase().includes(value)
+
+||
+
+item.desc.toLowerCase().includes(value)
+
 )
 
 searchResults.innerHTML = ""
+
+if(filtered.length === 0){
+
+searchResults.innerHTML = `
+
+<div class="search-item">
+
+<div>
+<h4>No Products Found</h4>
+<p>Try another search</p>
+</div>
+
+</div>
+
+`
+
+searchResults.style.display = "block"
+
+productsContainer.innerHTML = `
+
+<h2 style="
+grid-column:span 2;
+text-align:center;
+padding:40px;
+color:#0072ff;
+">
+No Products Found
+</h2>
+
+`
+
+return
+
+}
 
 filtered.forEach(product=>{
 
@@ -1205,6 +1188,7 @@ searchResults.innerHTML += `
 <div>
 <h4>${product.name}</h4>
 <p>${product.price}</p>
+<small>${product.category}</small>
 </div>
 
 </div>
