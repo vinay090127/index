@@ -4,7 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>ElectroHub Electronics Store</title>
+<title>ElectroHub App</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 
@@ -16,355 +18,189 @@ font-family:Arial,sans-serif;
 }
 
 body{
-background:
-linear-gradient(rgba(5,10,25,0.88),rgba(5,10,25,0.92)),
-url('https://images.unsplash.com/photo-1498049794561-7780e7231661?q=80&w=1400');
-background-size:cover;
-background-position:center;
-background-attachment:fixed;
-min-height:100vh;
+background:#0f172a;
 overflow-x:hidden;
 }
 
-/* BACKGROUND GLOW */
+/* BACKGROUND */
 
-body::before{
-content:"";
+.bg{
 position:fixed;
-width:450px;
-height:450px;
-background:linear-gradient(#00c6ff,#0072ff);
-border-radius:50%;
-top:-180px;
-left:-140px;
-opacity:0.35;
-filter:blur(40px);
-animation:float1 8s infinite alternate;
-}
-
-body::after{
-content:"";
-position:fixed;
-width:380px;
-height:380px;
-background:linear-gradient(#7f5af0,#2cb67d);
-border-radius:50%;
-bottom:-160px;
-right:-140px;
-opacity:0.35;
-filter:blur(40px);
-animation:float2 8s infinite alternate;
-}
-
-@keyframes float1{
-0%{transform:translateY(0px);}
-100%{transform:translateY(40px);}
-}
-
-@keyframes float2{
-0%{transform:translateY(0px);}
-100%{transform:translateY(-40px);}
-}
-
-/* FLASH EFFECTS */
-
-.flash,
-.flash2,
-.flash3{
-position:fixed;
-border-radius:50%;
-pointer-events:none;
-z-index:0;
-}
-
-.flash{
-width:180px;
-height:180px;
-background:radial-gradient(circle,
-rgba(255,255,255,0.9),
-rgba(0,198,255,0.3),
-transparent);
-animation:flashMove 6s linear infinite;
-filter:blur(6px);
-}
-
-.flash2{
-width:230px;
-height:230px;
-background:radial-gradient(circle,
-rgba(255,255,255,0.7),
-rgba(127,90,240,0.3),
-transparent);
-animation:flashMove2 8s linear infinite;
-filter:blur(10px);
-}
-
-.flash3{
-width:150px;
-height:150px;
-background:radial-gradient(circle,
-rgba(255,255,255,0.8),
-rgba(44,182,125,0.35),
-transparent);
-animation:flashMove3 7s linear infinite;
-filter:blur(5px);
-}
-
-@keyframes flashMove{
-0%{
-transform:translate(-100px,-100px);
-opacity:0;
-}
-20%{
-opacity:1;
-}
-100%{
-transform:translate(1300px,700px);
-opacity:0;
-}
-}
-
-@keyframes flashMove2{
-0%{
-transform:translate(1300px,-100px);
-opacity:0;
-}
-20%{
-opacity:1;
-}
-100%{
-transform:translate(-200px,800px);
-opacity:0;
-}
-}
-
-@keyframes flashMove3{
-0%{
-transform:translate(600px,700px);
-opacity:0;
-}
-30%{
-opacity:1;
-}
-100%{
-transform:translate(50px,-300px);
-opacity:0;
-}
-}
-
-/* LOGIN */
-
-.auth-container{
-width:430px;
-background:rgba(255,255,255,0.1);
-backdrop-filter:blur(25px);
-border:1px solid rgba(255,255,255,0.2);
-padding:45px;
-border-radius:35px;
-box-shadow:
-0 0 30px rgba(0,114,255,0.3),
-0 0 60px rgba(0,114,255,0.15);
-margin:40px auto;
-position:relative;
+width:100%;
+height:100%;
 overflow:hidden;
-z-index:2;
+z-index:-1;
 }
 
-.auth-container::before{
-content:"";
+.circle{
 position:absolute;
-width:260px;
-height:260px;
-background:linear-gradient(#0072ff,#00c6ff);
 border-radius:50%;
-top:-120px;
-right:-100px;
-opacity:0.3;
+filter:blur(60px);
+animation:float 10s infinite alternate;
 }
 
-.auth-container::after{
-content:"";
-position:absolute;
+.c1{
+width:350px;
+height:350px;
+background:#2563eb;
+top:-100px;
+left:-100px;
+opacity:0.4;
+}
+
+.c2{
+width:300px;
+height:300px;
+background:#06b6d4;
+bottom:-100px;
+right:-100px;
+opacity:0.4;
+}
+
+.c3{
 width:220px;
 height:220px;
-background:linear-gradient(#7f5af0,#2cb67d);
-border-radius:50%;
-bottom:-120px;
-left:-90px;
+background:#9333ea;
+top:50%;
+left:50%;
 opacity:0.25;
 }
 
-.auth-logo{
+@keyframes float{
+0%{
+transform:translateY(0px);
+}
+100%{
+transform:translateY(40px);
+}
+}
+
+/* AUTH */
+
+.auth-page{
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:100vh;
+padding:20px;
+}
+
+.auth-box{
+width:420px;
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(18px);
+padding:40px;
+border-radius:30px;
+border:1px solid rgba(255,255,255,0.1);
+box-shadow:0 0 30px rgba(37,99,235,0.25);
+}
+
+.logo{
+font-size:60px;
 text-align:center;
-font-size:70px;
 margin-bottom:10px;
-position:relative;
-z-index:2;
 }
 
-.auth-title{
-text-align:center;
-font-size:42px;
+.title{
+font-size:38px;
 font-weight:bold;
-color:white;
-margin-bottom:5px;
-position:relative;
-z-index:2;
-}
-
-.auth-subtitle{
 text-align:center;
-color:#dbeafe;
-margin-bottom:30px;
-position:relative;
-z-index:2;
-font-size:15px;
-}
-
-.input-box{
-margin-bottom:18px;
-position:relative;
-z-index:2;
-}
-
-.input-box input{
-width:100%;
-padding:17px;
-border:none;
-border-radius:18px;
-outline:none;
-background:rgba(255,255,255,0.12);
 color:white;
-font-size:16px;
-border:1px solid rgba(255,255,255,0.18);
-transition:0.3s;
+margin-bottom:10px;
 }
 
-.input-box input::placeholder{
-color:#dbeafe;
+.subtitle{
+text-align:center;
+color:#cbd5e1;
+margin-bottom:30px;
 }
 
-.input-box input:focus{
-border:1px solid #38bdf8;
-box-shadow:0 0 15px rgba(56,189,248,0.5);
-background:rgba(255,255,255,0.18);
+.input-group{
+margin-bottom:18px;
 }
 
-button{
+.input-group input{
 width:100%;
 padding:16px;
 border:none;
-border-radius:18px;
-background:linear-gradient(45deg,#0072ff,#00c6ff);
+outline:none;
+border-radius:16px;
+background:rgba(255,255,255,0.08);
+border:1px solid rgba(255,255,255,0.08);
+color:white;
+font-size:16px;
+}
+
+.input-group input::placeholder{
+color:#cbd5e1;
+}
+
+.input-group input:focus{
+border:1px solid #38bdf8;
+box-shadow:0 0 12px rgba(56,189,248,0.4);
+}
+
+.auth-btn{
+width:100%;
+padding:16px;
+border:none;
+border-radius:16px;
+background:linear-gradient(45deg,#2563eb,#06b6d4);
 color:white;
 font-size:17px;
 font-weight:bold;
 cursor:pointer;
-transition:0.4s;
+transition:0.3s;
 }
 
-button:hover{
+.auth-btn:hover{
 transform:translateY(-3px);
-box-shadow:0 10px 25px rgba(0,114,255,0.45);
 }
 
-.switch{
-text-align:center;
+.switch-text{
 margin-top:15px;
+text-align:center;
 color:white;
 }
 
-.switch span{
+.switch-text span{
 color:#38bdf8;
 cursor:pointer;
 font-weight:bold;
 }
 
 #message{
-text-align:center;
 margin-top:15px;
-color:white;
-}
-
-/* SUCCESS */
-
-.success-overlay{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.5);
-backdrop-filter:blur(6px);
-display:none;
-z-index:9998;
-}
-
-.success-overlay.active{
-display:block;
-}
-
-.success-popup{
-position:fixed;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%) scale(0);
-background:white;
-padding:35px;
-border-radius:30px;
 text-align:center;
-width:320px;
-z-index:9999;
-transition:0.4s;
-}
-
-.success-popup.active{
-transform:translate(-50%,-50%) scale(1);
-}
-
-.tick{
-width:90px;
-height:90px;
-border-radius:50%;
-background:linear-gradient(45deg,#22c55e,#16a34a);
-display:flex;
-justify-content:center;
-align-items:center;
-font-size:45px;
 color:white;
-margin:auto;
-margin-bottom:20px;
-}
-
-.success-popup h2{
-color:#16a34a;
-margin-bottom:10px;
 }
 
 /* APP */
 
 #appPage{
 display:none;
-background:#f1f5f9;
 min-height:100vh;
+background:#f1f5f9;
 }
 
+/* HEADER */
+
 .header{
-background:white;
-padding:15px 20px;
 display:flex;
 justify-content:space-between;
 align-items:center;
-box-shadow:0 2px 10px rgba(0,0,0,0.1);
+padding:15px 20px;
+background:white;
 position:sticky;
 top:0;
 z-index:100;
+box-shadow:0 2px 10px rgba(0,0,0,0.08);
 }
 
-.logo{
+.brand{
 font-size:28px;
 font-weight:bold;
-background:linear-gradient(45deg,#0072ff,#00c6ff);
+background:linear-gradient(45deg,#2563eb,#06b6d4);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
 }
@@ -378,8 +214,9 @@ position:relative;
 width:100%;
 padding:14px;
 border-radius:14px;
-border:1px solid #ccc;
+border:1px solid #ddd;
 outline:none;
+font-size:15px;
 }
 
 .search-results{
@@ -388,37 +225,38 @@ top:60px;
 width:100%;
 background:white;
 border-radius:15px;
-box-shadow:0 5px 20px rgba(0,0,0,0.2);
+overflow:hidden;
 display:none;
+box-shadow:0 10px 20px rgba(0,0,0,0.12);
+z-index:999;
 max-height:300px;
 overflow-y:auto;
-z-index:999;
 }
 
 .search-item{
 display:flex;
-gap:10px;
+gap:12px;
 padding:10px;
 cursor:pointer;
 border-bottom:1px solid #eee;
 }
 
 .search-item:hover{
-background:#f1f5f9;
+background:#f8fafc;
 }
 
 .search-item img{
 width:60px;
 height:60px;
-object-fit:cover;
 border-radius:10px;
+object-fit:cover;
 }
 
 .profile{
 width:50px;
 height:50px;
 border-radius:50%;
-background:linear-gradient(45deg,#0072ff,#00c6ff);
+background:linear-gradient(45deg,#2563eb,#06b6d4);
 display:flex;
 justify-content:center;
 align-items:center;
@@ -441,44 +279,46 @@ padding:20px;
 background:white;
 border-radius:22px;
 overflow:hidden;
-box-shadow:0 10px 25px rgba(0,0,0,0.1);
-transition:0.4s;
+box-shadow:0 10px 25px rgba(0,0,0,0.08);
+transition:0.3s;
 cursor:pointer;
 position:relative;
 }
 
 .card:hover{
-transform:translateY(-8px) scale(1.02);
+transform:translateY(-5px);
 }
 
-.card::before{
-content:"Electronics";
+.card img{
+width:100%;
+height:200px;
+object-fit:cover;
+}
+
+.badge{
 position:absolute;
-top:12px;
-left:12px;
-background:linear-gradient(45deg,#0072ff,#00c6ff);
+top:10px;
+left:10px;
+background:linear-gradient(45deg,#2563eb,#06b6d4);
 color:white;
-padding:5px 12px;
+padding:6px 12px;
 border-radius:20px;
 font-size:12px;
 font-weight:bold;
 }
 
-.card img{
-width:100%;
-height:190px;
-object-fit:cover;
+.card-content{
+padding:15px;
 }
 
-.card h3{
-padding:12px 12px 5px;
-font-size:18px;
+.card-content h3{
+margin-bottom:8px;
 }
 
-.card p{
-padding:0 12px 15px;
-color:#0072ff;
+.price{
+color:#2563eb;
 font-weight:bold;
+font-size:18px;
 }
 
 /* DETAILS */
@@ -486,31 +326,31 @@ font-weight:bold;
 #detailsPage{
 display:none;
 padding:20px;
-background:#f1f5f9;
 min-height:100vh;
+background:#f1f5f9;
 }
 
-.details-card{
+.details-box{
 background:white;
-border-radius:20px;
 padding:20px;
+border-radius:24px;
 max-width:500px;
 margin:auto;
-text-align:center;
-box-shadow:0 5px 15px rgba(0,0,0,0.1);
+box-shadow:0 10px 20px rgba(0,0,0,0.08);
 }
 
-.details-card img{
+.details-box img{
 width:100%;
-border-radius:15px;
+border-radius:18px;
+margin-bottom:15px;
 }
 
 .back-btn{
-background:red;
 margin-top:20px;
+background:red;
 }
 
-/* PROFILE */
+/* PROFILE PANEL */
 
 .profile-panel{
 position:fixed;
@@ -519,21 +359,18 @@ right:-420px;
 width:390px;
 height:100%;
 background:white;
-transition:0.4s;
 z-index:9999;
+transition:0.4s;
 padding:25px;
 overflow-y:auto;
-box-shadow:-5px 0 30px rgba(0,0,0,0.2);
+box-shadow:-5px 0 25px rgba(0,0,0,0.2);
 }
 
 .profile-panel.active{
 right:0;
 }
 
-.close-profile{
-position:absolute;
-top:18px;
-left:18px;
+.close-btn{
 width:42px;
 height:42px;
 border-radius:50%;
@@ -542,26 +379,26 @@ color:white;
 display:flex;
 justify-content:center;
 align-items:center;
-cursor:pointer;
 font-size:20px;
+cursor:pointer;
 }
 
 .profile-top{
 text-align:center;
-margin-top:30px;
+margin-top:20px;
 }
 
-.profile-avatar{
+.avatar{
 width:110px;
 height:110px;
 border-radius:50%;
-background:linear-gradient(45deg,#0072ff,#00c6ff);
+background:linear-gradient(45deg,#2563eb,#06b6d4);
+margin:auto;
 display:flex;
 justify-content:center;
 align-items:center;
-margin:auto;
-color:white;
 font-size:42px;
+color:white;
 margin-bottom:15px;
 }
 
@@ -569,50 +406,61 @@ margin-bottom:15px;
 background:#f8fafc;
 padding:18px;
 border-radius:18px;
-margin-bottom:18px;
+margin-top:18px;
 }
 
 .profile-card h3{
-color:#0072ff;
+color:#2563eb;
 margin-bottom:10px;
-}
-
-.profile-card ul{
-padding-left:20px;
 }
 
 .profile-card li{
 margin-bottom:8px;
 }
 
-.logout-btn{
+.logout{
 background:linear-gradient(45deg,#ef4444,#dc2626);
 margin-top:20px;
+}
+
+/* SUCCESS */
+
+.success{
+position:fixed;
+top:20px;
+right:20px;
+background:#22c55e;
+color:white;
+padding:15px 25px;
+border-radius:14px;
+display:none;
+z-index:99999;
+font-weight:bold;
 }
 
 /* MOBILE */
 
 @media(max-width:700px){
 
-.auth-container{
-width:92%;
-padding:35px 25px;
-}
-
 .products{
 grid-template-columns:repeat(2,1fr);
+gap:14px;
 }
 
 .card img{
 height:150px;
 }
 
-.profile-panel{
+.auth-box{
 width:100%;
 }
 
 .search-box{
 width:50%;
+}
+
+.profile-panel{
+width:100%;
 }
 
 }
@@ -622,56 +470,52 @@ width:50%;
 
 <body>
 
-<div class="flash"></div>
-<div class="flash2"></div>
-<div class="flash3"></div>
+<div class="bg">
+<div class="circle c1"></div>
+<div class="circle c2"></div>
+<div class="circle c3"></div>
+</div>
 
-<!-- SUCCESS -->
-
-<div class="success-overlay" id="successOverlay"></div>
-
-<div class="success-popup" id="successPopup">
-
-<div class="tick">✓</div>
-
-<h2>Login Successful</h2>
-
-<p>Welcome to ElectroHub Electronics Store</p>
-
+<div class="success" id="success">
+Login Successful
 </div>
 
 <!-- AUTH -->
 
-<div class="auth-container" id="authPage">
+<div class="auth-page" id="authPage">
 
-<div class="auth-logo">🖥️</div>
+<div class="auth-box">
 
-<div class="auth-title" id="title">
+<div class="logo">⚡</div>
+
+<div class="title" id="formTitle">
 Signup
 </div>
 
-<div class="auth-subtitle">
-Premium Electronics & Gadget Store
+<div class="subtitle">
+ElectroHub Electronics Store
 </div>
 
-<div class="input-box">
+<div class="input-group">
 <input type="text" id="username" placeholder="Enter Username">
 </div>
 
-<div class="input-box">
+<div class="input-group">
 <input type="password" id="password" placeholder="Enter Password">
 </div>
 
-<button id="authBtn">
+<button class="auth-btn" id="authBtn">
 Signup
 </button>
 
-<div class="switch">
+<div class="switch-text">
 Already have account?
-<span id="toggleAuth">Login</span>
+<span id="toggleForm">Login</span>
 </div>
 
 <div id="message"></div>
+
+</div>
 
 </div>
 
@@ -681,13 +525,13 @@ Already have account?
 
 <div class="header">
 
-<div class="logo">
+<div class="brand">
 ⚡ ElectroHub
 </div>
 
 <div class="search-box">
 
-<input type="text" id="searchInput" placeholder="Search electronics...">
+<input type="text" id="searchInput" placeholder="Search products...">
 
 <div class="search-results" id="searchResults"></div>
 
@@ -699,7 +543,7 @@ U
 
 </div>
 
-<div class="products" id="productsContainer"></div>
+<div class="products" id="products"></div>
 
 </div>
 
@@ -707,17 +551,17 @@ U
 
 <div id="detailsPage">
 
-<div class="details-card">
+<div class="details-box">
 
 <img id="detailImage">
 
 <h2 id="detailTitle"></h2>
 
-<p id="detailPrice"></p>
+<h3 id="detailPrice"></h3>
 
 <p id="detailDesc"></p>
 
-<button class="back-btn" onclick="goBack()">
+<button class="auth-btn back-btn" onclick="goBack()">
 Back
 </button>
 
@@ -729,20 +573,22 @@ Back
 
 <div class="profile-panel" id="profilePanel">
 
-<div class="close-profile" id="closeProfile">
-←
+<div class="close-btn" id="closeProfile">
+✕
 </div>
 
 <div class="profile-top">
 
-<div class="profile-avatar" id="profileAvatar">
+<div class="avatar" id="avatar">
 U
 </div>
 
-<h2 id="profileName">User</h2>
+<h2 id="profileName">
+User
+</h2>
 
-<p style="color:gray;margin-top:5px;">
-Premium Electronics Customer
+<p style="color:gray;">
+Premium Customer
 </p>
 
 </div>
@@ -751,9 +597,7 @@ Premium Electronics Customer
 
 <h3>User Details</h3>
 
-<p><b>Name:</b> <span id="userDetailName">User</span></p>
-
-<p><b>Email:</b> user@gmail.com</p>
+<p><b>Name:</b> <span id="userNameDetail">User</span></p>
 
 <p><b>Membership:</b> Premium</p>
 
@@ -766,21 +610,19 @@ Premium Electronics Customer
 <h3>Wishlist</h3>
 
 <ul>
-<li>iPhone 15 Pro Max</li>
-<li>MacBook Pro M3</li>
-<li>PlayStation 5</li>
-<li>VR Headset</li>
+<li>iPhone 15 Pro</li>
+<li>MacBook Pro</li>
+<li>Gaming Laptop</li>
 </ul>
 
 </div>
 
 <div class="profile-card">
 
-<h3>Cart Items</h3>
+<h3>Cart</h3>
 
 <ul>
 <li>Wireless Headphones</li>
-<li>Gaming Mouse</li>
 <li>Smart Watch</li>
 </ul>
 
@@ -788,187 +630,153 @@ Premium Electronics Customer
 
 <div class="profile-card">
 
-<h3>Company Policies</h3>
+<h3>Policies</h3>
 
 <ul>
-<li>7 Days Easy Return</li>
-<li>100% Secure Payments</li>
-<li>Free Shipping Above ₹999</li>
+<li>7 Days Return</li>
+<li>Secure Payments</li>
 <li>Warranty Available</li>
 </ul>
 
 </div>
 
-<div class="profile-card">
-
-<h3>Help & Support</h3>
-
-<p>Email: support@electrohub.com</p>
-
-<p>Phone: +91 9876543210</p>
-
-<p>24×7 Customer Support Available</p>
-
-</div>
-
-<button class="logout-btn" onclick="logoutUser()">
+<button class="auth-btn logout" onclick="logoutUser()">
 Logout
 </button>
 
 </div>
 
-<script type="module">
+<script>
 
-import { createClient }
-from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+const SUPABASE_URL = "https://frwbimnghfoidnjnfuhn.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_uSleMs6GiwmOuKIH9m4xOA__pc2sq_q";
 
-// SUPABASE
+const supabaseClient = supabase.createClient(
+SUPABASE_URL,
+SUPABASE_ANON_KEY
+);
 
-const supabaseUrl = "https://frwbimnghfoidnjnfuhn.supabase.co"
-const supabaseAnonKey = "YOUR_sb_publishable_uSleMs6GiwmOuKIH9m4xOA__pc2sq_qSUPABASE_ANON_KEY"
+let loginMode = false;
 
-const supabase = createClient(
-supabaseUrl,
-supabaseAnonKey
-)
+const title = document.getElementById("formTitle");
+const authBtn = document.getElementById("authBtn");
+const message = document.getElementById("message");
 
-// AUTH
+document.getElementById("toggleForm")
+.onclick = function(){
 
-let isLogin = false
+loginMode = !loginMode;
 
-const title = document.getElementById("title")
-const authBtn = document.getElementById("authBtn")
-const message = document.getElementById("message")
+if(loginMode){
 
-document.addEventListener("click",(e)=>{
+title.innerText = "Login";
+authBtn.innerText = "Login";
 
-if(e.target.id === "toggleAuth"){
-
-isLogin = !isLogin
-
-if(isLogin){
-
-title.innerText = "Login"
-authBtn.innerText = "Login"
-
-document.querySelector(".switch").innerHTML =
+document.querySelector(".switch-text").innerHTML =
 `Don't have account?
-<span id="toggleAuth">Signup</span>`
+<span id="toggleForm">Signup</span>`;
 
 }else{
 
-title.innerText = "Signup"
-authBtn.innerText = "Signup"
+title.innerText = "Signup";
+authBtn.innerText = "Signup";
 
-document.querySelector(".switch").innerHTML =
+document.querySelector(".switch-text").innerHTML =
 `Already have account?
-<span id="toggleAuth">Login</span>`
+<span id="toggleForm">Login</span>`;
 
 }
 
-}
+location.reload();
 
-})
+};
 
-authBtn.addEventListener("click", async()=>{
+authBtn.onclick = async function(){
 
 const username =
-document.getElementById("username").value
+document.getElementById("username").value;
 
 const password =
-document.getElementById("password").value
+document.getElementById("password").value;
 
-if(username === "" || password === ""){
+if(username==="" || password===""){
 
-message.innerText = "Enter all details"
-return
+message.innerText = "Enter all details";
+return;
 
 }
 
-// LOGIN
+if(loginMode){
 
-if(isLogin){
-
-const { data } = await supabase
+const { data,error } = await supabaseClient
 .from("users")
 .select("*")
-.eq("username", username)
-.eq("password", password)
+.eq("username",username)
+.eq("password",password);
 
-if(data.length > 0){
+if(data && data.length>0){
 
-message.style.color = "lightgreen"
-message.innerText = "Login Success"
-
-document.getElementById("successOverlay")
-.classList.add("active")
-
-document.getElementById("successPopup")
-.classList.add("active")
+document.getElementById("success").style.display =
+"block";
 
 setTimeout(()=>{
 
-document.getElementById("successOverlay")
-.classList.remove("active")
+document.getElementById("success").style.display =
+"none";
 
-document.getElementById("successPopup")
-.classList.remove("active")
+document.getElementById("authPage").style.display =
+"none";
 
-document.getElementById("authPage").style.display="none"
+document.getElementById("appPage").style.display =
+"block";
 
-document.getElementById("appPage").style.display="block"
+},1500);
 
-},2000)
+document.getElementById("profileBtn").innerText =
+username[0].toUpperCase();
 
-document.getElementById("profileBtn")
-.innerText = username[0].toUpperCase()
+document.getElementById("avatar").innerText =
+username[0].toUpperCase();
 
-document.getElementById("profileAvatar")
-.innerText = username[0].toUpperCase()
+document.getElementById("profileName").innerText =
+username;
 
-document.getElementById("profileName")
-.innerText = username
-
-document.getElementById("userDetailName")
-.innerText = username
+document.getElementById("userNameDetail").innerText =
+username;
 
 }else{
 
-message.style.color = "red"
-message.innerText = "Invalid Login"
+message.innerText = "Invalid Login";
+message.style.color = "red";
 
 }
 
-}
+}else{
 
-// SIGNUP
-
-else{
-
-const { error } = await supabase
+const { error } = await supabaseClient
 .from("users")
 .insert([
 {
 username,
 password
 }
-])
+]);
 
 if(error){
 
-message.style.color = "red"
-message.innerText = error.message
+message.innerText = error.message;
+message.style.color = "red";
 
 }else{
 
-message.style.color = "lightgreen"
-message.innerText = "Signup Successful"
+message.innerText = "Signup Successful";
+message.style.color = "lightgreen";
 
 }
 
 }
 
-})
+};
 
 // PRODUCTS
 
@@ -976,110 +784,54 @@ const gadgets = [
 
 {
 name:"iPhone 15",
-category:"Mobile",
 price:"₹79,999",
 image:"https://images.unsplash.com/photo-1695048133142-1a20484d2569",
-desc:"Apple latest smartphone with A17 chip."
-},
-
-{
-name:"Samsung S24 Ultra",
-category:"Mobile",
-price:"₹1,09,999",
-image:"https://images.unsplash.com/photo-1610945265064-0e34e5519bbf",
-desc:"Premium Samsung flagship smartphone."
+desc:"Apple flagship smartphone."
 },
 
 {
 name:"Gaming Laptop",
-category:"Laptop",
 price:"₹1,20,000",
 image:"https://images.unsplash.com/photo-1517336714739-489689fd1ca8",
-desc:"High performance gaming laptop."
+desc:"Powerful gaming laptop."
 },
 
 {
 name:"MacBook Pro",
-category:"Laptop",
 price:"₹1,89,999",
 image:"https://images.unsplash.com/photo-1515879218367-8466d910aaa4",
-desc:"Powerful Apple laptop for creators."
-},
-
-{
-name:"Smart Watch",
-category:"Watch",
-price:"₹12,999",
-image:"https://images.unsplash.com/photo-1523275335684-37898b6baf30",
-desc:"Track fitness and notifications."
+desc:"Apple professional laptop."
 },
 
 {
 name:"Wireless Headphones",
-category:"Audio",
 price:"₹5,999",
 image:"https://images.unsplash.com/photo-1505740420928-5e560c06d30e",
-desc:"Noise cancellation headphones."
+desc:"Noise cancelling headphones."
+},
+
+{
+name:"Smart Watch",
+price:"₹12,999",
+image:"https://images.unsplash.com/photo-1523275335684-37898b6baf30",
+desc:"Fitness smart watch."
 },
 
 {
 name:"PlayStation 5",
-category:"Gaming",
 price:"₹54,999",
 image:"https://images.unsplash.com/photo-1606813907291-d86efa9b94db",
-desc:"Next generation gaming console."
-},
-
-{
-name:"VR Headset",
-category:"Gaming",
-price:"₹39,999",
-image:"https://images.unsplash.com/photo-1622979135225-d2ba269cf1ac",
-desc:"Immersive virtual reality headset."
-},
-
-{
-name:"Gaming Mouse",
-category:"Accessories",
-price:"₹2,499",
-image:"https://images.unsplash.com/photo-1527864550417-7fd91fc51a46",
-desc:"RGB gaming mouse."
-},
-
-{
-name:"Mechanical Keyboard",
-category:"Accessories",
-price:"₹6,999",
-image:"https://images.unsplash.com/photo-1511467687858-23d96c32e4ae",
-desc:"RGB mechanical keyboard."
-},
-
-{
-name:"4K Monitor",
-category:"Accessories",
-price:"₹29,999",
-image:"https://images.unsplash.com/photo-1527443224154-c4a3942d3acf",
-desc:"Ultra HD gaming monitor."
-},
-
-{
-name:"Drone Camera",
-category:"Camera",
-price:"₹1,15,999",
-image:"https://images.unsplash.com/photo-1473968512647-3e447244af8f",
-desc:"4K aerial drone camera."
+desc:"Next gen gaming console."
 }
 
-]
-
-// SHOW PRODUCTS
+];
 
 const productsContainer =
-document.getElementById("productsContainer")
+document.getElementById("products");
 
 function showProducts(data){
 
-productsContainer.innerHTML = ""
+productsContainer.innerHTML = "";
 
 data.forEach(product=>{
 
@@ -1087,95 +839,61 @@ productsContainer.innerHTML += `
 
 <div class="card">
 
+<div class="badge">
+Electronics
+</div>
+
 <img src="${product.image}">
+
+<div class="card-content">
 
 <h3>${product.name}</h3>
 
-<p>${product.price}</p>
+<div class="price">${product.price}</div>
 
 </div>
 
-`
+</div>
 
-})
+`;
 
-attachCards(data)
+});
+
+attachCards(data);
 
 }
 
-showProducts(gadgets)
+showProducts(gadgets);
 
 // SEARCH
 
 const searchInput =
-document.getElementById("searchInput")
+document.getElementById("searchInput");
 
 const searchResults =
-document.getElementById("searchResults")
+document.getElementById("searchResults");
 
-searchInput.addEventListener("keyup",(e)=>{
+searchInput.addEventListener("keyup",function(e){
 
 const value =
-e.target.value.toLowerCase()
+e.target.value.toLowerCase();
 
-if(value === ""){
+if(value===""){
 
-searchResults.style.display = "none"
-showProducts(gadgets)
-return
+searchResults.style.display = "none";
+
+showProducts(gadgets);
+
+return;
 
 }
 
 const filtered =
 gadgets.filter(item=>
-
 item.name.toLowerCase().includes(value)
+);
 
-||
-
-item.category.toLowerCase().includes(value)
-
-||
-
-item.desc.toLowerCase().includes(value)
-
-)
-
-searchResults.innerHTML = ""
-
-if(filtered.length === 0){
-
-searchResults.innerHTML = `
-
-<div class="search-item">
-
-<div>
-<h4>No Products Found</h4>
-<p>Try another search</p>
-</div>
-
-</div>
-
-`
-
-searchResults.style.display = "block"
-
-productsContainer.innerHTML = `
-
-<h2 style="
-grid-column:span 2;
-text-align:center;
-padding:40px;
-color:#0072ff;
-">
-No Products Found
-</h2>
-
-`
-
-return
-
-}
+searchResults.innerHTML = "";
 
 filtered.forEach(product=>{
 
@@ -1188,41 +906,38 @@ searchResults.innerHTML += `
 <div>
 <h4>${product.name}</h4>
 <p>${product.price}</p>
-<small>${product.category}</small>
 </div>
 
 </div>
 
-`
+`;
 
-})
+});
 
-searchResults.style.display = "block"
+searchResults.style.display = "block";
 
-showProducts(filtered)
+showProducts(filtered);
 
-attachSearchItems(filtered)
+attachSearch(filtered);
 
-})
+});
 
 // SEARCH CLICK
 
-function attachSearchItems(data){
+function attachSearch(data){
 
 const items =
-document.querySelectorAll(".search-item")
+document.querySelectorAll(".search-item");
 
 items.forEach((item,index)=>{
 
-item.addEventListener("click",()=>{
+item.onclick = function(){
 
-openDetails(data[index])
+openDetails(data[index]);
 
-searchResults.style.display = "none"
+};
 
-})
-
-})
+});
 
 }
 
@@ -1231,17 +946,17 @@ searchResults.style.display = "none"
 function attachCards(data){
 
 const cards =
-document.querySelectorAll(".card")
+document.querySelectorAll(".card");
 
 cards.forEach((card,index)=>{
 
-card.addEventListener("click",()=>{
+card.onclick = function(){
 
-openDetails(data[index])
+openDetails(data[index]);
 
-})
+};
 
-})
+});
 
 }
 
@@ -1250,91 +965,67 @@ openDetails(data[index])
 function openDetails(product){
 
 document.getElementById("appPage").style.display =
-"none"
+"none";
 
 document.getElementById("detailsPage").style.display =
-"block"
+"block";
 
 document.getElementById("detailImage").src =
-product.image
+product.image;
 
 document.getElementById("detailTitle").innerText =
-product.name
+product.name;
 
 document.getElementById("detailPrice").innerText =
-product.price
+product.price;
 
 document.getElementById("detailDesc").innerText =
-product.desc
+product.desc;
 
 }
-
-// BACK
 
 window.goBack = function(){
 
 document.getElementById("detailsPage").style.display =
-"none"
+"none";
 
 document.getElementById("appPage").style.display =
-"block"
+"block";
 
-}
+};
 
 // PROFILE
 
-const profileBtn =
 document.getElementById("profileBtn")
+.onclick = function(){
 
-const profilePanel =
 document.getElementById("profilePanel")
+.classList.add("active");
 
-profileBtn.addEventListener("click",()=>{
-
-profilePanel.classList.add("active")
-
-})
+};
 
 document.getElementById("closeProfile")
-.addEventListener("click",()=>{
+.onclick = function(){
 
-profilePanel.classList.remove("active")
+document.getElementById("profilePanel")
+.classList.remove("active");
 
-})
+};
 
 // LOGOUT
 
 window.logoutUser = function(){
 
-profilePanel.classList.remove("active")
+document.getElementById("profilePanel")
+.classList.remove("active");
 
 document.getElementById("appPage").style.display =
-"none"
+"none";
 
 document.getElementById("authPage").style.display =
-"block"
+"flex";
 
-document.getElementById("username").value = ""
-document.getElementById("password").value = ""
-
-message.innerText = ""
-
-}
-
-// CLOSE SEARCH
-
-document.addEventListener("click",(e)=>{
-
-if(
-!searchInput.contains(e.target) &&
-!searchResults.contains(e.target)
-){
-
-searchResults.style.display = "none"
-
-}
-
-})
+};
 
 </script>
 
