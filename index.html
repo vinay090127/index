@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Employee Login & Register</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#4facfe,#00f2fe);
+}
+
+.container{
+    width:350px;
+    background:#fff;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+
+h2{
+    text-align:center;
+    margin-bottom:20px;
+    color:#333;
+}
+
+.input-box{
+    margin-bottom:15px;
+}
+
+.input-box input{
+    width:100%;
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    outline:none;
+    font-size:16px;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    background:#007bff;
+    color:white;
+    border:none;
+    border-radius:8px;
+    font-size:16px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    background:#0056b3;
+}
+
+.toggle{
+    text-align:center;
+    margin-top:15px;
+    color:#007bff;
+    cursor:pointer;
+}
+
+.message{
+    margin-top:15px;
+    text-align:center;
+    font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2 id="title">Employee Login</h2>
+
+    <div class="input-box">
+        <input type="text" id="employeeId" placeholder="Employee ID">
+    </div>
+
+    <div class="input-box">
+        <input type="password" id="password" placeholder="Password">
+    </div>
+
+    <button onclick="submitForm()" id="mainBtn">Login</button>
+
+    <div class="toggle" onclick="toggleForm()" id="toggleText">
+        New Employee? Register Here
+    </div>
+
+    <div class="message" id="message"></div>
+
+</div>
+
+<script type="module">
+
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+
+const SUPABASE_URL = "https://frwbimnghfoidnjnfuhn.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_uSleMs6GiwmOuKIH9m4xOA__pc2sq_q";
+
+const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+let isLogin = true;
+
+window.toggleForm = function(){
+
+    isLogin = !isLogin;
+
+    document.getElementById("title").innerText =
+        isLogin ? "Employee Login" : "Employee Register";
+
+    document.getElementById("mainBtn").innerText =
+        isLogin ? "Login" : "Register";
+
+    document.getElementById("toggleText").innerText =
+        isLogin
+        ? "New Employee? Register Here"
+        : "Already Have Account? Login";
+
+    document.getElementById("message").innerText = "";
+}
+
+window.submitForm = async function(){
+
+    const employeeId = document.getElementById("employeeId").value;
+    const password = document.getElementById("password").value;
+    const message = document.getElementById("message");
+
+    if(employeeId === "" || password === ""){
+        message.style.color = "red";
+        message.innerText = "Please fill all fields";
+        return;
+    }
+
+    if(isLogin){
+
+        const { data, error } = await supabase
+        .from("employees")
+        .select("*")
+        .eq("employee_id", employeeId)
+        .eq("password", password)
+        .single();
+
+        if(error || !data){
+            message.style.color = "red";
+            message.innerText = "Invalid Employee ID or Password";
+        }else{
+            message.style.color = "green";
+            message.innerText = "Login Successful 🎉";
+
+            setTimeout(()=>{
+                document.body.innerHTML = `
+                    <div style="
+                        height:100vh;
+                        display:flex;
+                        justify-content:center;
+                        align-items:center;
+                        background:linear-gradient(135deg,#43e97b,#38f9d7);
+                        font-family:Arial;
+                    ">
+                        <div style="
+                            background:white;
+                            padding:40px;
+                            border-radius:15px;
+                            box-shadow:0 10px 20px rgba(0,0,0,0.2);
+                            text-align:center;
+                        ">
+                            <h1>Welcome Employee 🎉</h1>
+                        </div>
+                    </div>
+                `;
+            },1000);
+        }
+
+    }else{
+
+        const { error } = await supabase
+        .from("employees")
+        .insert([
+            {
+                employee_id: employeeId,
+                password: password
+            }
+        ]);
+
+        if(error){
+            message.style.color = "red";
+            message.innerText = error.message;
+        }else{
+            message.style.color = "green";
+            message.innerText = "Registration Successful ✅";
+        }
+    }
+}
+
+</script>
+
+</body>
+</html>
