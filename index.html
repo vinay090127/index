@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Professional Gadget Store</title>
+<title>ElectroHub Electronics Store</title>
 
 <style>
 
@@ -16,8 +16,8 @@ font-family:Arial,sans-serif;
 
 body{
 background:
-linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)),
-url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1200');
+linear-gradient(rgba(5,10,25,0.88),rgba(5,10,25,0.9)),
+url('https://images.unsplash.com/photo-1498049794561-7780e7231661?q=80&w=1400');
 background-size:cover;
 background-position:center;
 background-attachment:fixed;
@@ -25,82 +25,230 @@ min-height:100vh;
 overflow-x:hidden;
 }
 
-/* SPLASH EFFECTS */
+/* BACKGROUND GLOW */
 
 body::before{
 content:"";
 position:fixed;
-width:350px;
-height:350px;
-background:linear-gradient(#2563eb,#60a5fa);
+width:420px;
+height:420px;
+background:linear-gradient(#00c6ff,#0072ff);
 border-radius:50%;
-top:-120px;
-left:-100px;
+top:-150px;
+left:-120px;
 opacity:0.35;
-filter:blur(20px);
+filter:blur(40px);
+animation:float1 8s infinite alternate;
 }
 
 body::after{
 content:"";
 position:fixed;
-width:300px;
-height:300px;
-background:linear-gradient(#06b6d4,#2563eb);
+width:350px;
+height:350px;
+background:linear-gradient(#7f5af0,#2cb67d);
 border-radius:50%;
-bottom:-120px;
-right:-100px;
-opacity:0.35;
-filter:blur(20px);
+bottom:-150px;
+right:-120px;
+opacity:0.3;
+filter:blur(40px);
+animation:float2 8s infinite alternate;
+}
+
+@keyframes float1{
+0%{transform:translateY(0px);}
+100%{transform:translateY(40px);}
+}
+
+@keyframes float2{
+0%{transform:translateY(0px);}
+100%{transform:translateY(-40px);}
+}
+
+/* FLASH ANIMATION */
+
+.flash{
+position:fixed;
+width:180px;
+height:180px;
+border-radius:50%;
+background:radial-gradient(circle,
+rgba(255,255,255,0.9),
+rgba(0,198,255,0.4),
+transparent);
+animation:flashMove 6s linear infinite;
+filter:blur(6px);
+pointer-events:none;
+z-index:0;
+}
+
+.flash2{
+position:fixed;
+width:220px;
+height:220px;
+border-radius:50%;
+background:radial-gradient(circle,
+rgba(255,255,255,0.7),
+rgba(127,90,240,0.3),
+transparent);
+animation:flashMove2 8s linear infinite;
+filter:blur(10px);
+pointer-events:none;
+z-index:0;
+}
+
+.flash3{
+position:fixed;
+width:140px;
+height:140px;
+border-radius:50%;
+background:radial-gradient(circle,
+rgba(255,255,255,0.9),
+rgba(44,182,125,0.35),
+transparent);
+animation:flashMove3 7s linear infinite;
+filter:blur(5px);
+pointer-events:none;
+z-index:0;
+}
+
+@keyframes flashMove{
+
+0%{
+transform:translate(-100px,-100px);
+opacity:0;
+}
+
+20%{
+opacity:1;
+}
+
+50%{
+transform:translate(500px,200px);
+opacity:0.8;
+}
+
+100%{
+transform:translate(1200px,600px);
+opacity:0;
+}
+
+}
+
+@keyframes flashMove2{
+
+0%{
+transform:translate(1200px,-100px);
+opacity:0;
+}
+
+20%{
+opacity:1;
+}
+
+50%{
+transform:translate(500px,300px);
+opacity:0.8;
+}
+
+100%{
+transform:translate(-300px,700px);
+opacity:0;
+}
+
+}
+
+@keyframes flashMove3{
+
+0%{
+transform:translate(600px,700px);
+opacity:0;
+}
+
+30%{
+opacity:1;
+}
+
+70%{
+opacity:0.9;
+}
+
+100%{
+transform:translate(100px,-300px);
+opacity:0;
+}
+
 }
 
 /* AUTH */
 
 .auth-container{
-width:420px;
-background:rgba(255,255,255,0.12);
-backdrop-filter:blur(25px);
-border:1px solid rgba(255,255,255,0.25);
-padding:40px;
-border-radius:30px;
+width:430px;
+background:rgba(255,255,255,0.1);
+backdrop-filter:blur(30px);
+border:1px solid rgba(255,255,255,0.2);
+padding:45px;
+border-radius:35px;
 box-shadow:
-0 0 30px rgba(37,99,235,0.3),
-0 0 60px rgba(37,99,235,0.2);
-margin:50px auto;
+0 0 30px rgba(0,114,255,0.3),
+0 0 60px rgba(0,114,255,0.15);
+margin:40px auto;
 position:relative;
 overflow:hidden;
+z-index:2;
 }
 
 .auth-container::before{
 content:"";
 position:absolute;
-width:250px;
-height:250px;
-background:linear-gradient(#2563eb,#60a5fa);
+width:260px;
+height:260px;
+background:linear-gradient(#0072ff,#00c6ff);
 border-radius:50%;
 top:-120px;
 right:-100px;
-opacity:0.4;
+opacity:0.3;
+filter:blur(10px);
 }
 
 .auth-container::after{
 content:"";
 position:absolute;
-width:200px;
-height:200px;
-background:linear-gradient(#06b6d4,#3b82f6);
+width:220px;
+height:220px;
+background:linear-gradient(#7f5af0,#2cb67d);
 border-radius:50%;
-bottom:-100px;
-left:-80px;
-opacity:0.4;
+bottom:-120px;
+left:-90px;
+opacity:0.25;
+filter:blur(10px);
 }
 
-.auth-container h2{
+.auth-logo{
 text-align:center;
-margin-bottom:30px;
-color:white;
-font-size:38px;
+font-size:65px;
+margin-bottom:10px;
 position:relative;
 z-index:2;
+}
+
+.auth-title{
+text-align:center;
+font-size:40px;
+font-weight:bold;
+color:white;
+margin-bottom:5px;
+position:relative;
+z-index:2;
+}
+
+.auth-subtitle{
+text-align:center;
+color:#dbeafe;
+margin-bottom:30px;
+position:relative;
+z-index:2;
+font-size:15px;
 }
 
 .input-box{
@@ -111,42 +259,46 @@ z-index:2;
 
 .input-box input{
 width:100%;
-padding:16px;
+padding:17px;
 border:none;
-border-radius:16px;
+border-radius:18px;
 outline:none;
-background:rgba(255,255,255,0.15);
+background:rgba(255,255,255,0.12);
 color:white;
 font-size:16px;
-border:1px solid rgba(255,255,255,0.2);
+border:1px solid rgba(255,255,255,0.18);
+transition:0.3s;
 }
 
 .input-box input::placeholder{
-color:#eee;
+color:#dbeafe;
 }
 
 .input-box input:focus{
-border:1px solid #60a5fa;
-box-shadow:0 0 15px rgba(96,165,250,0.5);
+border:1px solid #38bdf8;
+box-shadow:0 0 15px rgba(56,189,248,0.5);
+background:rgba(255,255,255,0.18);
 }
 
 button{
 width:100%;
-padding:15px;
+padding:16px;
 border:none;
-border-radius:16px;
-background:linear-gradient(45deg,#2563eb,#3b82f6);
+border-radius:18px;
+background:linear-gradient(45deg,#0072ff,#00c6ff);
 color:white;
 font-size:17px;
+font-weight:bold;
 cursor:pointer;
 position:relative;
 z-index:2;
 transition:0.4s;
+letter-spacing:0.5px;
 }
 
 button:hover{
-transform:translateY(-2px);
-box-shadow:0 10px 20px rgba(37,99,235,0.4);
+transform:translateY(-3px);
+box-shadow:0 10px 25px rgba(0,114,255,0.45);
 }
 
 .switch{
@@ -158,7 +310,7 @@ z-index:2;
 }
 
 .switch span{
-color:#60a5fa;
+color:#38bdf8;
 cursor:pointer;
 font-weight:bold;
 }
@@ -171,6 +323,85 @@ position:relative;
 z-index:2;
 }
 
+/* SUCCESS POPUP */
+
+.success-popup{
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%) scale(0);
+background:white;
+padding:35px;
+border-radius:30px;
+text-align:center;
+box-shadow:0 20px 40px rgba(0,0,0,0.25);
+z-index:10000;
+transition:0.4s;
+width:320px;
+}
+
+.success-popup.active{
+transform:translate(-50%,-50%) scale(1);
+}
+
+.success-popup .tick{
+width:90px;
+height:90px;
+border-radius:50%;
+background:linear-gradient(45deg,#22c55e,#16a34a);
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:45px;
+color:white;
+margin:auto;
+margin-bottom:20px;
+animation:tickPop 0.6s ease;
+}
+
+@keyframes tickPop{
+
+0%{
+transform:scale(0);
+}
+
+70%{
+transform:scale(1.15);
+}
+
+100%{
+transform:scale(1);
+}
+
+}
+
+.success-popup h2{
+color:#16a34a;
+margin-bottom:10px;
+font-size:28px;
+}
+
+.success-popup p{
+color:gray;
+font-size:15px;
+}
+
+.success-overlay{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.45);
+backdrop-filter:blur(6px);
+z-index:9999;
+display:none;
+}
+
+.success-overlay.active{
+display:block;
+}
+
 /* APP */
 
 #appPage{
@@ -180,21 +411,24 @@ min-height:100vh;
 }
 
 .header{
-background:white;
-padding:15px 20px;
+background:rgba(255,255,255,0.95);
+padding:15px 22px;
 display:flex;
 align-items:center;
 justify-content:space-between;
-box-shadow:0 2px 10px rgba(0,0,0,0.1);
+box-shadow:0 4px 15px rgba(0,0,0,0.08);
 position:sticky;
 top:0;
 z-index:100;
+backdrop-filter:blur(10px);
 }
 
 .logo{
-font-size:26px;
+font-size:28px;
 font-weight:bold;
-color:#2563eb;
+background:linear-gradient(45deg,#0072ff,#00c6ff);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
 }
 
 .search-box{
@@ -204,10 +438,17 @@ width:55%;
 
 .search-box input{
 width:100%;
-padding:13px;
-border-radius:12px;
-border:1px solid #ccc;
+padding:14px;
+border-radius:14px;
+border:1px solid #dbeafe;
 outline:none;
+font-size:15px;
+transition:0.3s;
+}
+
+.search-box input:focus{
+border:1px solid #38bdf8;
+box-shadow:0 0 10px rgba(56,189,248,0.3);
 }
 
 .search-results{
@@ -244,10 +485,10 @@ object-fit:cover;
 }
 
 .profile{
-width:48px;
-height:48px;
+width:50px;
+height:50px;
 border-radius:50%;
-background:linear-gradient(45deg,#2563eb,#60a5fa);
+background:linear-gradient(45deg,#0072ff,#00c6ff);
 color:white;
 display:flex;
 justify-content:center;
@@ -268,21 +509,36 @@ padding:20px;
 
 .card{
 background:white;
-border-radius:22px;
+border-radius:24px;
 overflow:hidden;
-box-shadow:0 10px 25px rgba(0,0,0,0.12);
+box-shadow:0 10px 25px rgba(0,0,0,0.1);
 cursor:pointer;
 transition:0.4s;
+position:relative;
 }
 
 .card:hover{
-transform:translateY(-8px) scale(1.02);
+transform:translateY(-10px) scale(1.02);
+box-shadow:0 20px 35px rgba(0,114,255,0.2);
 }
 
 .card img{
 width:100%;
-height:180px;
+height:190px;
 object-fit:cover;
+}
+
+.card::before{
+content:"Electronics";
+position:absolute;
+top:12px;
+left:12px;
+background:linear-gradient(45deg,#0072ff,#00c6ff);
+color:white;
+padding:6px 12px;
+border-radius:20px;
+font-size:12px;
+font-weight:bold;
 }
 
 .card h3{
@@ -292,7 +548,7 @@ font-size:18px;
 
 .card p{
 padding:0 12px 18px;
-color:#2563eb;
+color:#0072ff;
 font-weight:bold;
 font-size:17px;
 }
@@ -330,13 +586,13 @@ background:red;
 margin-top:20px;
 }
 
-/* PROFILE PANEL */
+/* PROFILE */
 
 .profile-panel{
 position:fixed;
 top:0;
-right:-400px;
-width:380px;
+right:-420px;
+width:390px;
 height:100%;
 background:white;
 box-shadow:-5px 0 30px rgba(0,0,0,0.2);
@@ -344,6 +600,8 @@ transition:0.4s;
 z-index:9999;
 padding:25px;
 overflow-y:auto;
+border-top-left-radius:25px;
+border-bottom-left-radius:25px;
 }
 
 .profile-panel.active{
@@ -352,55 +610,58 @@ right:0;
 
 .close-profile{
 position:absolute;
-top:15px;
-right:15px;
-width:40px;
-height:40px;
+top:18px;
+left:18px;
+width:42px;
+height:42px;
 border-radius:50%;
-background:#ef4444;
+background:linear-gradient(45deg,#ef4444,#dc2626);
 color:white;
 display:flex;
 justify-content:center;
 align-items:center;
-font-size:20px;
+font-size:22px;
 cursor:pointer;
 font-weight:bold;
+box-shadow:0 5px 15px rgba(239,68,68,0.3);
 }
 
 .profile-top{
 text-align:center;
-margin-top:20px;
+margin-top:35px;
 }
 
 .profile-avatar{
-width:100px;
-height:100px;
+width:110px;
+height:110px;
 border-radius:50%;
-background:linear-gradient(45deg,#2563eb,#60a5fa);
+background:linear-gradient(45deg,#0072ff,#00c6ff);
 color:white;
 display:flex;
 justify-content:center;
 align-items:center;
-font-size:40px;
+font-size:42px;
 margin:auto;
 margin-bottom:15px;
-}
-
-.profile-details{
-margin-top:30px;
+box-shadow:0 10px 20px rgba(0,114,255,0.25);
 }
 
 .profile-card{
 background:#f8fafc;
-border-radius:16px;
-padding:16px;
+border-radius:18px;
+padding:18px;
 margin-bottom:18px;
 box-shadow:0 5px 10px rgba(0,0,0,0.05);
+transition:0.3s;
+}
+
+.profile-card:hover{
+transform:translateY(-3px);
 }
 
 .profile-card h3{
-color:#2563eb;
-margin-bottom:10px;
+color:#0072ff;
+margin-bottom:12px;
 }
 
 .profile-card ul{
@@ -422,18 +683,29 @@ margin-top:20px;
 
 .auth-container{
 width:92%;
+padding:35px 25px;
 }
 
 .products{
 grid-template-columns:repeat(2,1fr);
+gap:14px;
 }
 
-.search-box{
-width:50%;
+.card img{
+height:150px;
 }
 
 .profile-panel{
 width:100%;
+border-radius:0;
+}
+
+.search-box{
+width:52%;
+}
+
+.logo{
+font-size:22px;
 }
 
 }
@@ -443,21 +715,53 @@ width:100%;
 
 <body>
 
-<!-- LOGIN / SIGNUP -->
+<div class="flash"></div>
+<div class="flash2"></div>
+<div class="flash3"></div>
+
+<!-- LOGIN SUCCESS -->
+
+<div class="success-overlay" id="successOverlay"></div>
+
+<div class="success-popup" id="successPopup">
+
+<div class="tick">
+✓
+</div>
+
+<h2>Login Successful</h2>
+
+<p>
+Welcome to ElectroHub Electronics Store
+</p>
+
+</div>
+
+<!-- AUTH -->
 
 <div class="auth-container" id="authPage">
 
-<h2 id="title">Signup</h2>
+<div class="auth-logo">🖥️</div>
 
-<div class="input-box">
-<input type="text" id="username" placeholder="Username">
+<div class="auth-title" id="title">
+Signup
+</div>
+
+<div class="auth-subtitle">
+Premium Electronics & Gadget Store
 </div>
 
 <div class="input-box">
-<input type="password" id="password" placeholder="Password">
+<input type="text" id="username" placeholder="Enter Username">
 </div>
 
-<button id="authBtn">Signup</button>
+<div class="input-box">
+<input type="password" id="password" placeholder="Enter Password">
+</div>
+
+<button id="authBtn">
+Signup
+</button>
 
 <div class="switch">
 Already have account?
@@ -474,11 +778,13 @@ Already have account?
 
 <div class="header">
 
-<div class="logo">Gadgets</div>
+<div class="logo">
+⚡ ElectroHub
+</div>
 
 <div class="search-box">
 
-<input type="text" id="searchInput" placeholder="Search gadgets...">
+<input type="text" id="searchInput" placeholder="Search electronics...">
 
 <div class="search-results" id="searchResults"></div>
 
@@ -521,7 +827,7 @@ Back
 <div class="profile-panel" id="profilePanel">
 
 <div class="close-profile" id="closeProfile">
-✕
+←
 </div>
 
 <div class="profile-top">
@@ -533,7 +839,7 @@ U
 <h2 id="profileName">User</h2>
 
 <p style="color:gray;margin-top:5px;">
-Premium Gadget Customer
+Premium Electronics Customer
 </p>
 
 </div>
@@ -596,7 +902,7 @@ Premium Gadget Customer
 
 <h3>Help & Support</h3>
 
-<p>Email: support@gadgets.com</p>
+<p>Email: support@electrohub.com</p>
 
 <p>Phone: +91 9876543210</p>
 
@@ -620,8 +926,7 @@ from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
 // SUPABASE
 
 const supabaseUrl = "https://frwbimnghfoidnjnfuhn.supabase.co"
-
-const supabaseAnonKey = "Ysb_publishable_uSleMs6GiwmOuKIH9m4xOA__pc2sq_q"
+const supabaseAnonKey = "sb_publishable_uSleMs6GiwmOuKIH9m4xOA__pc2sq_q"
 
 const supabase = createClient(
 supabaseUrl,
@@ -696,9 +1001,27 @@ if(data.length > 0){
 message.style.color = "lightgreen"
 message.innerText = "Login Success"
 
+// SUCCESS POPUP
+
+document.getElementById("successOverlay")
+.classList.add("active")
+
+document.getElementById("successPopup")
+.classList.add("active")
+
+setTimeout(()=>{
+
+document.getElementById("successOverlay")
+.classList.remove("active")
+
+document.getElementById("successPopup")
+.classList.remove("active")
+
 document.getElementById("authPage").style.display="none"
 
 document.getElementById("appPage").style.display="block"
+
+},2000)
 
 document.getElementById("profileBtn")
 .innerText = username[0].toUpperCase()
@@ -742,7 +1065,7 @@ message.innerText = error.message
 }else{
 
 message.style.color = "lightgreen"
-message.innerText = "Signup Success"
+message.innerText = "Signup Successful"
 
 }
 
@@ -938,7 +1261,7 @@ openDetails(data[index])
 
 }
 
-// OPEN DETAILS
+// DETAILS
 
 function openDetails(product){
 
@@ -1014,7 +1337,7 @@ message.innerText = ""
 
 }
 
-// CLOSE SEARCH OUTSIDE
+// CLOSE SEARCH
 
 document.addEventListener("click",(e)=>{
 
