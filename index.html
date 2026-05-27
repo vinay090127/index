@@ -3,9 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Employee Login & Register</title>
+<title>Gadget Store App</title>
 
 <style>
+
 *{
     margin:0;
     padding:0;
@@ -14,195 +15,540 @@
 }
 
 body{
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:linear-gradient(135deg,#4facfe,#00f2fe);
+    background:#f1f5f9;
 }
 
-.container{
+/* AUTH */
+
+.auth-container{
     width:350px;
-    background:#fff;
+    background:white;
     padding:30px;
-    border-radius:15px;
-    box-shadow:0 10px 25px rgba(0,0,0,0.2);
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.1);
+    margin:60px auto;
 }
 
-h2{
+.auth-container h2{
     text-align:center;
-    margin-bottom:20px;
-    color:#333;
+    margin-bottom:25px;
 }
 
 .input-box{
-    margin-bottom:15px;
+    margin-bottom:18px;
 }
 
 .input-box input{
     width:100%;
     padding:12px;
     border:1px solid #ccc;
-    border-radius:8px;
+    border-radius:10px;
     outline:none;
-    font-size:16px;
 }
 
 button{
     width:100%;
     padding:12px;
-    background:#007bff;
-    color:white;
     border:none;
-    border-radius:8px;
+    border-radius:10px;
+    background:#2563eb;
+    color:white;
     font-size:16px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#1d4ed8;
+}
+
+.switch{
+    text-align:center;
+    margin-top:15px;
+}
+
+.switch span{
+    color:#2563eb;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+#message{
+    text-align:center;
+    margin-top:15px;
+}
+
+/* APP */
+
+#appPage{
+    display:none;
+}
+
+.header{
+    background:white;
+    padding:15px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    box-shadow:0 2px 10px rgba(0,0,0,0.1);
+    position:sticky;
+    top:0;
+}
+
+.logo{
+    font-size:24px;
+    font-weight:bold;
+    color:#2563eb;
+}
+
+.search-box{
+    width:50%;
+}
+
+.search-box input{
+    width:100%;
+    padding:12px;
+    border-radius:10px;
+    border:1px solid #ccc;
+}
+
+.profile{
+    width:45px;
+    height:45px;
+    border-radius:50%;
+    background:#2563eb;
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+/* PRODUCTS */
+
+.products{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+    padding:20px;
+}
+
+.card{
+    background:white;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
     cursor:pointer;
     transition:0.3s;
 }
 
-button:hover{
-    background:#0056b3;
+.card:hover{
+    transform:translateY(-5px);
 }
 
-.toggle{
-    text-align:center;
-    margin-top:15px;
-    color:#007bff;
-    cursor:pointer;
+.card img{
+    width:100%;
+    height:200px;
+    object-fit:cover;
 }
 
-.message{
-    margin-top:15px;
-    text-align:center;
+.card h3{
+    padding:10px;
+}
+
+.card p{
+    padding:0 10px 15px;
+    color:#2563eb;
     font-weight:bold;
 }
+
+/* DETAILS */
+
+#detailsPage{
+    display:none;
+    padding:20px;
+}
+
+.details-card{
+    background:white;
+    border-radius:20px;
+    padding:20px;
+    max-width:500px;
+    margin:auto;
+    text-align:center;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
+
+.details-card img{
+    width:100%;
+    border-radius:15px;
+}
+
+.details-card h2{
+    margin:15px 0;
+}
+
+.back-btn{
+    margin-top:20px;
+    background:red;
+}
+
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<!-- AUTH PAGE -->
 
-    <h2 id="title">Employee Login</h2>
+<div class="auth-container" id="authPage">
 
-    <div class="input-box">
-        <input type="text" id="employeeId" placeholder="Employee ID">
-    </div>
+<h2 id="title">Signup</h2>
 
-    <div class="input-box">
-        <input type="password" id="password" placeholder="Password">
-    </div>
+<div class="input-box">
+<input type="text" id="username" placeholder="Username">
+</div>
 
-    <button onclick="submitForm()" id="mainBtn">Login</button>
+<div class="input-box">
+<input type="password" id="password" placeholder="Password">
+</div>
 
-    <div class="toggle" onclick="toggleForm()" id="toggleText">
-        New Employee? Register Here
-    </div>
+<button id="authBtn">Signup</button>
 
-    <div class="message" id="message"></div>
+<div class="switch">
+Already have account?
+<span id="toggleAuth">Login</span>
+</div>
+
+<div id="message"></div>
+
+</div>
+
+<!-- APP PAGE -->
+
+<div id="appPage">
+
+<div class="header">
+
+<div class="logo">Gadgets</div>
+
+<div class="search-box">
+<input type="text" id="searchInput" placeholder="Search gadgets...">
+</div>
+
+<div class="profile" id="profileBtn">
+U
+</div>
+
+</div>
+
+<div class="products" id="productsContainer"></div>
+
+</div>
+
+<!-- DETAILS PAGE -->
+
+<div id="detailsPage">
+
+<div class="details-card">
+
+<img id="detailImage">
+
+<h2 id="detailTitle"></h2>
+
+<p id="detailPrice"></p>
+
+<p id="detailDesc"></p>
+
+<button class="back-btn" onclick="goBack()">
+Back
+</button>
+
+</div>
 
 </div>
 
 <script type="module">
 
-import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+import { createClient }
+from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
 
-const SUPABASE_URL = "https://frwbimnghfoidnjnfuhn.supabase.co";
-const SUPABASE_ANON_KEY = "sb_publishable_uSleMs6GiwmOuKIH9m4xOA__pc2sq_q";
+// ====================================
+// PASTE YOUR SUPABASE DETAILS
+// ====================================
 
-const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const supabaseUrl = "https://frwbimnghfoidnjnfuhn.supabase.co"
+const supabaseAnonKey = "sb_publishable_uSleMs6GiwmOuKIH9m4xOA__pc2sq_q"
 
-let isLogin = true;
+// ====================================
 
-window.toggleForm = function(){
+const supabase = createClient(
+supabaseUrl,
+supabaseAnonKey
+)
 
-    isLogin = !isLogin;
+let isLogin = false
 
-    document.getElementById("title").innerText =
-        isLogin ? "Employee Login" : "Employee Register";
+const title = document.getElementById("title")
+const authBtn = document.getElementById("authBtn")
+const toggleAuth = document.getElementById("toggleAuth")
+const message = document.getElementById("message")
 
-    document.getElementById("mainBtn").innerText =
-        isLogin ? "Login" : "Register";
+toggleAuth.addEventListener("click",()=>{
 
-    document.getElementById("toggleText").innerText =
-        isLogin
-        ? "New Employee? Register Here"
-        : "Already Have Account? Login";
+isLogin = !isLogin
 
-    document.getElementById("message").innerText = "";
+if(isLogin){
+
+title.innerText = "Login"
+authBtn.innerText = "Login"
+
+document.querySelector(".switch").innerHTML =
+`Don't have account? <span id="toggleAuth">Signup</span>`
+
+}
+else{
+
+title.innerText = "Signup"
+authBtn.innerText = "Signup"
+
+document.querySelector(".switch").innerHTML =
+`Already have account? <span id="toggleAuth">Login</span>`
+
 }
 
-window.submitForm = async function(){
+reloadToggle()
 
-    const employeeId = document.getElementById("employeeId").value;
-    const password = document.getElementById("password").value;
-    const message = document.getElementById("message");
+})
 
-    if(employeeId === "" || password === ""){
-        message.style.color = "red";
-        message.innerText = "Please fill all fields";
-        return;
-    }
+function reloadToggle(){
 
-    if(isLogin){
+document.getElementById("toggleAuth")
+.addEventListener("click",()=>{
 
-        const { data, error } = await supabase
-        .from("employees")
-        .select("*")
-        .eq("employee_id", employeeId)
-        .eq("password", password)
-        .single();
+isLogin = !isLogin
 
-        if(error || !data){
-            message.style.color = "red";
-            message.innerText = "Invalid Employee ID or Password";
-        }else{
-            message.style.color = "green";
-            message.innerText = "Login Successful 🎉";
+if(isLogin){
 
-            setTimeout(()=>{
-                document.body.innerHTML = `
-                    <div style="
-                        height:100vh;
-                        display:flex;
-                        justify-content:center;
-                        align-items:center;
-                        background:linear-gradient(135deg,#43e97b,#38f9d7);
-                        font-family:Arial;
-                    ">
-                        <div style="
-                            background:white;
-                            padding:40px;
-                            border-radius:15px;
-                            box-shadow:0 10px 20px rgba(0,0,0,0.2);
-                            text-align:center;
-                        ">
-                            <h1>Welcome Employee 🎉</h1>
-                        </div>
-                    </div>
-                `;
-            },1000);
-        }
+title.innerText = "Login"
+authBtn.innerText = "Login"
 
-    }else{
+document.querySelector(".switch").innerHTML =
+`Don't have account? <span id="toggleAuth">Signup</span>`
 
-        const { error } = await supabase
-        .from("employees")
-        .insert([
-            {
-                employee_id: employeeId,
-                password: password
-            }
-        ]);
+}
+else{
 
-        if(error){
-            message.style.color = "red";
-            message.innerText = error.message;
-        }else{
-            message.style.color = "green";
-            message.innerText = "Registration Successful ✅";
-        }
-    }
+title.innerText = "Signup"
+authBtn.innerText = "Signup"
+
+document.querySelector(".switch").innerHTML =
+`Already have account? <span id="toggleAuth">Login</span>`
+
+}
+
+reloadToggle()
+
+})
+
+}
+
+// AUTH
+
+authBtn.addEventListener("click", async()=>{
+
+const username =
+document.getElementById("username").value
+
+const password =
+document.getElementById("password").value
+
+// LOGIN
+
+if(isLogin){
+
+const { data } = await supabase
+.from("users")
+.select("*")
+.eq("username", username)
+.eq("password", password)
+
+if(data.length > 0){
+
+message.style.color = "green"
+message.innerText = "Login Success"
+
+document.getElementById("authPage").style.display="none"
+document.getElementById("appPage").style.display="block"
+
+document.getElementById("profileBtn")
+.innerText = username[0].toUpperCase()
+
+}
+else{
+
+message.style.color = "red"
+message.innerText = "Invalid Login"
+
+}
+
+}
+
+// SIGNUP
+
+else{
+
+const { error } = await supabase
+.from("users")
+.insert([
+{
+username,
+password
+}
+])
+
+if(error){
+
+message.style.color = "red"
+message.innerText = error.message
+
+}
+else{
+
+message.style.color = "green"
+message.innerText = "Signup Success"
+
+}
+
+}
+
+})
+
+// PRODUCTS
+
+const gadgets = [
+
+{
+name:"iPhone 15",
+price:"₹79,999",
+image:"https://images.unsplash.com/photo-1695048133142-1a20484d2569",
+desc:"Apple latest smartphone with A17 chip."
+},
+
+{
+name:"Gaming Laptop",
+price:"₹1,20,000",
+image:"https://images.unsplash.com/photo-1517336714739-489689fd1ca8",
+desc:"High performance gaming laptop."
+},
+
+{
+name:"Smart Watch",
+price:"₹12,999",
+image:"https://images.unsplash.com/photo-1523275335684-37898b6baf30",
+desc:"Track fitness and notifications."
+},
+
+{
+name:"Wireless Headphones",
+price:"₹5,999",
+image:"https://images.unsplash.com/photo-1505740420928-5e560c06d30e",
+desc:"Noise cancellation headphones."
+},
+
+{
+name:"Camera",
+price:"₹55,000",
+image:"https://images.unsplash.com/photo-1516035069371-29a1b244cc32",
+desc:"Professional DSLR camera."
+}
+
+]
+
+const productsContainer =
+document.getElementById("productsContainer")
+
+function showProducts(data){
+
+productsContainer.innerHTML = ""
+
+data.forEach(product=>{
+
+productsContainer.innerHTML += `
+
+<div class="card">
+
+<img src="${product.image}">
+
+<h3>${product.name}</h3>
+
+<p>${product.price}</p>
+
+</div>
+
+`
+
+})
+
+attachCards(data)
+
+}
+
+showProducts(gadgets)
+
+// SEARCH
+
+document.getElementById("searchInput")
+.addEventListener("keyup",(e)=>{
+
+const value =
+e.target.value.toLowerCase()
+
+const filtered =
+gadgets.filter(item=>
+item.name.toLowerCase().includes(value)
+)
+
+showProducts(filtered)
+
+})
+
+// DETAILS
+
+function attachCards(data){
+
+const cards =
+document.querySelectorAll(".card")
+
+cards.forEach((card,index)=>{
+
+card.addEventListener("click",()=>{
+
+document.getElementById("appPage").style.display="none"
+document.getElementById("detailsPage").style.display="block"
+
+document.getElementById("detailImage")
+.src = data[index].image
+
+document.getElementById("detailTitle")
+.innerText = data[index].name
+
+document.getElementById("detailPrice")
+.innerText = data[index].price
+
+document.getElementById("detailDesc")
+.innerText = data[index].desc
+
+})
+
+})
+
+}
+
+window.goBack = function(){
+
+document.getElementById("detailsPage").style.display="none"
+document.getElementById("appPage").style.display="block"
+
 }
 
 </script>
